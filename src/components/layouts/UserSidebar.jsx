@@ -19,14 +19,10 @@ export const UserSidebar = () => {
           data-bs-theme="dark"
         >
         <div className="sidebar-brand">
-          <a href="./index.html" className="brand-link">
-            <img
-              src="../../dist/assets/img/AdminLTELogo.png"
-              // alt="AdminLTE Logo"
-              className="brand-image opacity-75 shadow"
-            />
+          <a href="./" className="brand-link">
+            
 
-            <span className="brand-text fw-light">AdminLTE 4</span>
+            <span className="brand-text fw-light">Buyer Talk</span>
           </a>
         </div>
 
@@ -53,18 +49,18 @@ export const UserSidebar = () => {
               data-accordion="false"
             >
               <li className="nav-item menu-open">
-                <Link to="/product/products2" className="nav-link active">
+                <Link to="/addcomplaint" className="nav-link active">
                   <i className="nav-icon bi bi-speedometer" />
                   <p>
-                    Add Product
+                    Add Complaint
                     <i className="nav-arrow bi bi-chevron-right" />
                   </p>
                 </Link>
                 <ul className="nav nav-treeview">
                   <li className="nav-item">
-                    <Link to="/product/viewmyproducts" className="nav-link active">
+                    <Link to="/viewallcomplaints" className="nav-link active">
                       <i className="nav-icon bi bi-circle" />
-                      <p>View My Products </p>
+                      <p>View All Complaints </p>
                     </Link>
                   </li>
                   <li className="nav-item">

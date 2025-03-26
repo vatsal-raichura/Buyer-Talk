@@ -26,51 +26,52 @@ export const Login = () => {
   const navigate = useNavigate();
 
  
-  const submitHandler = async(data) => {
+  const submitHandler = async (data) => {
+    try {
+      const res = await axios.post("/user/login", data);
+      console.log(res.data);
 
-    setisLoading(true)
-   
-    const res = await axios.post("/user/login", data)
-    setisLoading(false)
-    console.log(res.data)
-    if(res.status === 200){
-       
-      
-      toast.success('login successfully',{
-                    position: "top-left",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: false,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                    transition: Bounce,
-                    });
-
-      localStorage.setItem("id",res.data.data._id)
-      localStorage.setItem("role",res.data.data.roleId.name)       
-
-      if(res.data.data.roleId.name === "user"){
-        setTimeout(()=>{navigate("/user")},2500)
+      if (res.status === 200) {
         
+        // alert("login successfully")
+        toast.success('Login Successfully', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+          });
+        localStorage.setItem("id", res.data.data._id);
+        localStorage.setItem("role", res.data.data.roleId.name);
+
+        if (res.data.data.roleId.name === "user") {
+          setTimeout(() => {
+            navigate("/user");
+          }, 2500);
+        }
       }
+    } catch (error) {
+      // alert("Login failed");
+      toast.error('  Invalid Credentials !!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+        });
+        
     }
-    else{
-      alert("Login Failed")
-      toast.error('login failed',{
-                    position: "top-left",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: false,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                    transition: Bounce,
-                    });
-    }
-  }
+  };
+
+
 
   const ValidationSchema = {
     emailValidator: {
@@ -146,7 +147,7 @@ export const Login = () => {
           </Form.Group>
 
           <div className="text-center my-2">
-            <Link to="/error">Forgot password?</Link>
+            <Link to="/forgotPassword">Forgot password?</Link>
           </div>
 
           {/* Submit Button */}

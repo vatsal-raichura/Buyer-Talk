@@ -99,11 +99,7 @@ export const Products2 = () => {
           required: { value: true, message: "Product Brand is required *" },
           
         },
-        ratingValidator: {
-          required: { value: true, message: "Product Rating is required *" },
-          min: { value: 1, message: "Minimum Rating  is  1 " },
-          max:{value: 5, message: "Maximum Rating is 5" }
-        },
+        
         priceValidator: {
           required: { value: true, message: "Product Price is required *" },
           min: { value: 1, message: "Price is not valid" },
@@ -185,11 +181,7 @@ export const Products2 = () => {
               <Form.Text className="text-danger">{errors.brand?.message}</Form.Text>
             </Form.Group>
 
-            <Form.Group className="mb-2">
-              <Form.Label>Product Rating</Form.Label>
-              <Form.Control type="number" {...register("rating", ValidationSchema.ratingValidator)} />
-              <Form.Text className="text-danger">{errors.rating?.message}</Form.Text>
-            </Form.Group>
+            
 
             <Form.Group className="mb-2">
               <Form.Label>Product Price</Form.Label>

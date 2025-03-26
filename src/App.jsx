@@ -1,34 +1,40 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
-import { UserSidebar } from './components/layouts/UserSidebar'
+import { UserSidebar } from "./components/layouts/UserSidebar";
 // import './App.css'
-import './assets/adminlte.css'
-import './assets/adminlte.min.css'
-import { Route, Routes, useLocation } from 'react-router-dom'
-import { UserProfile } from './components/user/UserProfile'
-import { Login } from './components/common/Login'
-import { SignUp } from './components/common/SignUp'
-import { BuyertalkSidebar } from './components/layouts/BuyertalkSidebar'
-import { Demo } from './components/buyer/Demo'
-import axios from 'axios'
+import "./assets/adminlte.css";
+import "./assets/adminlte.min.css";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { UserProfile } from "./components/user/UserProfile";
+import { Login } from "./components/common/Login";
+import { SignUp } from "./components/common/SignUp";
+import { BuyertalkSidebar } from "./components/layouts/BuyertalkSidebar";
+import { Demo } from "./components/buyer/Demo";
+import axios from "axios";
 
-import { SupportTeamSidebar } from './components/layouts/SupportTeamSidebar'
-import { SupportTeamLogin } from './components/supportteam/SupportTeamLogin'
-import { SupportTeamSignUp } from './components/supportteam/SupportTeamSignUp'
+import { SupportTeamSidebar } from "./components/layouts/SupportTeamSidebar";
+import { SupportTeamLogin } from "./components/supportteam/SupportTeamLogin";
+import { SupportTeamSignUp } from "./components/supportteam/SupportTeamSignUp";
 
+import { Products } from "./components/products/Products";
+import PrivateRoutes from "./hooks/PrivateRoutes";
+import { Products2 } from "./components/products/Products2";
+import { ViewMyProducts } from "./components/products/ViewMyProducts";
+import { UpdateMyProduct } from "./components/products/UpdateMyProduct";
+import { BusinessLogin } from "./components/common/BusinessLogin";
+import { BusinessSignUp } from "./components/common/BusinessSignUp";
+import LandingPage from "./components/common/LandingPage";
+import { ReviewRating } from "./components/review_and_ratings/ReviewRating";
+import { ResetPassword } from "./components/common/ResetPassword";
 
-import { Products } from './components/products/Products'
-import PrivateRoutes from './hooks/PrivateRoutes'
-import { Products2 } from './components/products/Products2'
-import { ViewMyProducts } from './components/products/ViewMyProducts'
-import { UpdateMyProduct } from './components/products/UpdateMyProduct'
-import { BusinessLogin } from './components/common/BusinessLogin'
-import { BusinessSignUp } from './components/common/BusinessSignUp'
+import { AddComplaints } from "./components/user/AddComplaints";
+import { ViewAllComplaints } from "./components/user/ViewAllComplaints";
+import { ForgotPassword } from "./components/common/ForgotPassword";
+// import {LandingPage} from './components/common/LandingPage'
 
 function App() {
-
-  axios.defaults.baseURL = "http://localhost:3000"
-  const location = useLocation()
+  axios.defaults.baseURL = "http://localhost:3000";
+  const location = useLocation();
 
   useEffect(() => {
     if (location.pathname === "/login" || location.pathname === "/signup") {
@@ -39,54 +45,87 @@ function App() {
     }
   }, [location.pathname]);
 
- 
-
   return (
-   
-  
-     <div className={location.pathname === "/login" || location.pathname === "/signup" || location.pathname === "/businessSignup" || location.pathname === "/businessLogin" ? ""  :"app-wrapper"}>
-     <Routes>
-      <Route path="/login" element={<Login></Login>}></Route>
-      <Route path="/signup" element={<SignUp></SignUp>}></Route>
-      <Route path="/businessSignup" element={<BusinessSignUp></BusinessSignUp>}></Route>
-      <Route path="/businessLogin" element={<BusinessLogin></BusinessLogin>}></Route>
-
-      <Route path="" element={<PrivateRoutes></PrivateRoutes>}>
-      <Route path="/business" element={<BuyertalkSidebar/>}>
+    <div
+      className={
+        location.pathname === "/login" ||
+        location.pathname === "/signup" ||
+        location.pathname === "/businessSignup" ||
+        location.pathname === "/businessLogin"|| 
+        location.pathname === "/reviewrating" || 
+        location.pathname === "/resetPassword/:token" ||
+        location.pathname === "/forgotPassword" ||
+        location.pathname === "/addcomplaint"
+          ? ""
+          : "app-wrapper" 
+      }
+    >
+      <Routes>
+        <Route path="/login" element={<Login></Login>}></Route>
+        <Route path="/signup" element={<SignUp></SignUp>}></Route>
+        <Route
+          path="/businessSignup"
+          element={<BusinessSignUp></BusinessSignUp>}
+        ></Route>
+        <Route
+          path="/businessLogin"
+          element={<BusinessLogin></BusinessLogin>}
+        ></Route>
+        <Route path="/" element={<LandingPage></LandingPage>}></Route>
+        <Route path ="/resetPassword/:token" element={<ResetPassword/>}></Route>
+        <Route path ="/forgotPassword" element={<ForgotPassword></ForgotPassword>}></Route>
+        <Route path="/addcomplaint" element={<AddComplaints></AddComplaints>}></Route>
+        <Route path="/viewallcomplaints" element={<ViewAllComplaints></ViewAllComplaints>}></Route>
         
-      
-      </Route>
-      <Route path="/supportteam" element={<SupportTeamSidebar></SupportTeamSidebar>}>
-        <Route path="login" element={<SupportTeamLogin></SupportTeamLogin>}></Route>
-        <Route path="signup" element={<SupportTeamSignUp></SupportTeamSignUp>}></Route>
-      
-      </Route>
-
-      
-      <Route path="/user" element={<UserSidebar />}>
-        <Route path="profile" element={<UserProfile></UserProfile>}></Route>
-      </Route>
-
-      <Route path="/product" element={<BuyertalkSidebar />}>
-        <Route path="products" element={<Products></Products>}></Route>
-        <Route path="products2" element={<Products2></Products2>}></Route>
-        <Route path="viewmyproducts" element={<ViewMyProducts></ViewMyProducts>}></Route>
-        <Route path="updateproduct/:id" element={<UpdateMyProduct></UpdateMyProduct>}></Route>
 
 
-      </Route>
-      <Route path='/buyer' element={<BuyertalkSidebar></BuyertalkSidebar>}>
-      <Route path='demo' element={<Demo></Demo>}></Route>
-      </Route>
-      </Route>
-     </Routes>
 
+        <Route path="" element={<PrivateRoutes></PrivateRoutes>}>
+          <Route path="/business" element={<BuyertalkSidebar />}></Route>
+          <Route
+            path="/supportteam"
+            element={<SupportTeamSidebar></SupportTeamSidebar>}
+          >
+            <Route
+              path="login"
+              element={<SupportTeamLogin></SupportTeamLogin>}
+            ></Route>
+            <Route
+              path="signup"
+              element={<SupportTeamSignUp></SupportTeamSignUp>}
+            ></Route>
+          </Route>
 
+          <Route path="/user" element={<UserSidebar />}>
+            <Route path="profile" element={<UserProfile></UserProfile>}></Route>
+            
+          </Route>
+
+          <Route path="/product" element={<BuyertalkSidebar />}>
+            <Route path="products" element={<Products></Products>}></Route>
+            <Route path="products2" element={<Products2></Products2>}></Route>
+            <Route
+              path="viewmyproducts"
+              element={<ViewMyProducts></ViewMyProducts>}
+            ></Route>
+            <Route
+              path="updateproduct/:id"
+              element={<UpdateMyProduct></UpdateMyProduct>}
+            ></Route>
+          </Route>
+
+          <Route path="/buyer" element={<BuyertalkSidebar></BuyertalkSidebar>}>
+            <Route path="demo" element={<Demo></Demo>}></Route>
+          </Route>
+
+          <Route
+            path="/reviewrating"
+            element={<ReviewRating></ReviewRating>}
+          ></Route>
+        </Route>
+      </Routes>
     </div>
-    
-  
-   
-  )
+  );
 }
 
-export default App
+export default App;
