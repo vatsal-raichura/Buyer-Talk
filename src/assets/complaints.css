@@ -1,0 +1,82 @@
+/* Container Styling */
+.table-container {
+    width: 90%;
+    margin: 20px auto;
+    overflow-x: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* Table Styling */
+  .complaint-table {
+    width: 100%;
+    table-layout: fixed; /* Prevents columns from shrinking */
+    border-collapse: collapse;
+    background: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  /* Header Styling */
+  thead {
+    background: #343a40;
+    color: white;
+  }
+  
+  th, td {
+    padding: 14px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Set fixed column widths */
+  th:nth-child(1), td:nth-child(1) { width: 22%; } /* Description column */
+  th:nth-child(2), td:nth-child(2) { width: 10%; }
+  th:nth-child(3), td:nth-child(3) { width: 12%; }
+  th:nth-child(4), td:nth-child(4) { width: 12%; }
+  th:nth-child(5), td:nth-child(5) { width: 10%; }
+  th:nth-child(6), td:nth-child(6) { width: 10%; }
+  th:nth-child(7), td:nth-child(7) { width: 24%; } /* Image column */
+  
+  /* Complaint Description Styling */
+  .description-cell {
+    text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .description-content {
+    max-width: 100%;
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.5;
+  }
+  
+  /* Row Styling */
+  tr:nth-child(even) {
+    background: #f1f1f1;
+  }
+  
+  tr:hover {
+    background: rgba(0, 123, 255, 0.1);
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  /* Stylish Product Images */
+  .product-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 3px solid #dee2e6;
+    transition: transform 0.3s;
+  }
+  
+  .product-img:hover {
+    transform: scale(1.1);
+  }
+  

@@ -1,7 +1,11 @@
 import React from "react";
 import hamburgermenu from "../../assets/images/hamburgermenu.png";
+import { Bounce, toast } from "react-toastify";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export const UserNavbar = ({ toggleSidebar }) => {
+
+  const navigate = useNavigate()
 
   const handleLogout = () => {
     localStorage.removeItem("id");  // Remove stored user ID
@@ -39,21 +43,21 @@ export const UserNavbar = ({ toggleSidebar }) => {
               <img src={hamburgermenu} style={{height:"25px",width:"25px"}}></img>
             </a>
           </li>
-          <li className="nav-item d-none d-md-block">
-            <a href="#" className="nav-link">
-              Home
-            </a>
+          <li className="nav-item d-visible d-md-block ">
+            <Link to="/" className="nav-link">
+              Home 
+            </Link>
           </li>
-          <li className="nav-item d-none d-md-block">
-            <a href="#" className="nav-link">
+          <li className="nav-item d-none d-md-block ">
+            <Link to="/contactUs" className="nav-link">
               Contact
-            </a>
+            </Link>
           </li>
         </ul>
 
        <ul>
        <li className="nav-item">
-            <button  onClick={()=>{handleLogout()}} className="btn btn-danger">LOG OUT </button>
+            <button  onClick={()=>{handleLogout()}} className="btn btn-danger">LOG OUT</button>
             {/* <a className="nav-link" href="#" data-lte-toggle="fullscreen">
               <i data-lte-icon="maximize" className="bi bi-arrows-fullscreen" />
               <i

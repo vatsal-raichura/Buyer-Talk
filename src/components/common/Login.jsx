@@ -56,6 +56,7 @@ export const Login = () => {
       }
     } catch (error) {
       // alert("Login failed");
+      console.log(error)
       toast.error('  Invalid Credentials !!', {
         position: "top-center",
         autoClose: 5000,
@@ -161,7 +162,7 @@ export const Login = () => {
         </p>
 
         {/* Social Media Buttons */}
-        <div className="text-center mt-3">
+        {/* <div className="text-center mt-3">
           <p>or sign up with:</p>
           <div className="d-flex justify-content-center gap-2">
             {[
@@ -175,7 +176,7 @@ export const Login = () => {
               </Button>
             ))}
           </div>
-        </div>
+        </div> */}
       </Card.Body>
     </Card>
   </Container>

@@ -19,11 +19,11 @@ export const UserSidebar = () => {
           data-bs-theme="dark"
         >
         <div className="sidebar-brand">
-          <a href="./" className="brand-link">
+          <Link to="/" className="brand-link">
             
 
-            <span className="brand-text fw-light">Buyer Talk</span>
-          </a>
+            <span className="brand-text fw-light">BUYER TALK</span>
+          </Link>
         </div>
 
         <div
@@ -49,31 +49,45 @@ export const UserSidebar = () => {
               data-accordion="false"
             >
               <li className="nav-item menu-open">
-                <Link to="/addcomplaint" className="nav-link active">
+                <Link to="/user/addcomplaint" className="nav-link active">
                   <i className="nav-icon bi bi-speedometer" />
                   <p>
                     Add Complaint
                     <i className="nav-arrow bi bi-chevron-right" />
                   </p>
                 </Link>
+
                 <ul className="nav nav-treeview">
                   <li className="nav-item">
-                    <Link to="/viewallcomplaints" className="nav-link active">
+                  <li className="nav-item">
+                    <Link to="/user/viewmycomplaints" className="nav-link active">
+                      <i className="nav-icon bi bi-circle" />
+                      <p>View My Complaints </p>
+                    </Link>
+                  </li>
+                    <Link to="/user/viewallcomplaints" className="nav-link active">
                       <i className="nav-icon bi bi-circle" />
                       <p>View All Complaints </p>
                     </Link>
                   </li>
+                  
                   <li className="nav-item">
-                    <a href="./index2.html" className="nav-link">
+                    <Link to="/user/addreviewandrating" className="nav-link active">
                       <i className="nav-icon bi bi-circle" />
-                      <p>Dashboard v2</p>
-                    </a>
+                      <p>Add Review and Rating </p>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a href="./index3.html" className="nav-link">
+                    <Link to="/user/viewallreviewandratings" className="nav-link active">
                       <i className="nav-icon bi bi-circle" />
-                      <p>Dashboard v3</p>
-                    </a>
+                      <p>View All Review and Ratings </p>
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/user/viewmyreviewandratings" className="nav-link active">
+                      <i className="nav-icon bi bi-circle" />
+                      <p>View My Review and Ratings </p>
+                    </Link>
                   </li>
                 </ul>
               </li>

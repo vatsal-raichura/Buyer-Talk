@@ -261,220 +261,69 @@
 
 
 
-// import axios from "axios";
-// import React, { useEffect, useState } from "react";
-// import { CustomLoader } from "../CustomLoader";
-// import "../../assets/complaints.css"
-
-
-
-// export const ViewAllComplaints = () => {
-//   const [complaints, setComplaints] = useState([]);
-//   const [isLoading, setIsLoading] = useState(false);
-
-//   // Function to fetch all complaints
-//   const getAllComplaints = async () => {
-//     setIsLoading(true);
-//     try {
-//       const res = await axios.get("/complaint/complaints");
-//       console.log(res.data); // Log API response
-//       setComplaints(res.data.data);
-//     } catch (error) {
-//       console.error("Error fetching complaints:", error);
-//     }
-//     setIsLoading(false);
-//   };
-
-//   useEffect(() => {
-//     getAllComplaints();
-//   }, []);
-
-//   return (
-//     <div style={{ textAlign: "center" }}>
-//       {isLoading && <CustomLoader />}
-//       <br />
-//       <h2>All Complaints</h2>
-//       <table className="table table-striped table-hover table-bordered">
-//         <thead>
-//           <tr>
-//             <th>Complaint Description</th>
-//             <th>Complaint Status</th>
-//             <th>Complaint Filed Date</th>
-//             <th>Product Name</th>
-//             <th>Product Brand</th>
-//             <th>Product Price</th>
-//             <th>Product Image</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {complaints?.map((ct) => (
-//             <tr key={ct._id}>
-//               <td style={{ width: "25%",  textAlign: "left"}}>{ct.description}</td>
-//               <td>{ct.status}</td>
-//               <td>{new Date(ct.fileddate).toLocaleDateString()}</td>
-
-//               {/* Check if product details exist */}
-//               <td>{ct.productId?.name || "N/A"}</td>
-//               <td>{ct.productId?.brand || "N/A"}</td>
-//               <td>{ct.productId?.price ? `$${ct.productId.price}` : "N/A"}</td>
-//               <td>
-//                 {ct.productId?.productURL ? (
-//                   <img
-//                     src={ct.productId.productURL}
-//                     alt={ct.productId.name}
-//                     style={{ width: "100px", height: "100px", objectFit: "cover", borderRadius: "10px" }}
-//                   />
-//                 ) : (
-//                   "No Image"
-//                 )}
-//               </td>
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
-
-// import axios from "axios";
-// import React, { useEffect, useState } from "react";
-// import { CustomLoader } from "../CustomLoader";
-// import "../../assets/complaints.css"; // Make sure to import the CSS file
-
-// export const ViewAllComplaints = () => {
-//   const [complaints, setComplaints] = useState([]);
-//   const [isLoading, setIsLoading] = useState(false);
-
-//   // Fetch all complaints
-//   const getAllComplaints = async () => {
-//     setIsLoading(true);
-//     try {
-//       const res = await axios.get("/complaint/complaints");
-//       setComplaints(res.data.data);
-//     } catch (error) {
-//       console.error("Error fetching complaints:", error);
-//     }
-//     setIsLoading(false);
-//   };
-
-//   useEffect(() => {
-//     getAllComplaints();
-//   }, []);
-
-//   return (
-//     <div className="table-container"> {/* Applying the container class */}
-//       {isLoading && <CustomLoader />}
-//       <h2 className="table-title">My Complaints</h2> {/* Styled title */}
-
-//       <table>
-//         <thead>
-//           <tr>
-//             <th className="description-column">Complaint Description</th> {/* Wider column for description */}
-//             <th>Complaint Status</th>
-//             <th>Complaint Filed Date</th>
-//             <th>Product Name</th>
-//             <th>Product Brand</th>
-//             <th>Product Price</th>
-//             <th>Product Image</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {complaints.length > 0 ? (
-//             complaints.map((ct) => (
-//               <tr key={ct._id}>
-//                 <td className="description-cell">{ct.description}</td> {/* Adjusted width */}
-//                 <td>{ct.status}</td>
-//                 <td>{new Date(ct.fileddate).toLocaleDateString()}</td>
-//                 <td>{ct.productId?.name || "N/A"}</td>
-//                 <td>{ct.productId?.brand || "N/A"}</td>
-//                 <td>{ct.productId?.price ? `$${ct.productId.price}` : "N/A"}</td>
-//                 <td>
-//                   {ct.productId?.productURL ? (
-//                     <img
-//                       src={ct.productId.productURL}
-//                       alt={ct.productId.name}
-//                       className="product-img" // Applying the image class
-//                     />
-//                   ) : (
-//                     "No Image"
-//                   )}
-//                 </td>
-//               </tr>
-//             ))
-//           ) : (
-//             <tr>
-//               <td colSpan="7" className="no-data">No complaints found</td>
-//             </tr>
-//           )}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
-
-
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { CustomLoader } from "../CustomLoader";
-import "../../assets/complaints.css" // Ensure you import CSS
+import "../../assets/complaints.css"
 import { Link } from "react-router-dom";
 
-export const ViewAllComplaints = () => {
-  const [complaints, setComplaints] = useState([]);
+export const ViewAllReviewAndRatings = () => {
+  const [ratings, setRatings] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Fetch all complaints
-  const getAllComplaints = async () => {
+  // Function to fetch all complaints
+  const getAllReviewAndRatings = async () => {
     setIsLoading(true);
     try {
-      const res = await axios.get("/complaint/complaints");
-      setComplaints(res.data.data);
+      const res = await axios.get("/rating/ratings");
+      console.log(res.data); // Log API response
+      setRatings(res.data.data);
     } catch (error) {
-      console.error("Error fetching complaints:", error);
+      console.error("Error fetching Review and Ratings:", error);
     }
     setIsLoading(false);
   };
 
   useEffect(() => {
-    getAllComplaints();
+    getAllReviewAndRatings();
   }, []);
 
   return (
-    <div className="table-container">
-      
+    <div className="table-container" style={{ textAlign: "center" }}>
       {isLoading && <CustomLoader />}
-      <h2>All Complaints</h2>
-      <table className="complaint-table">
+      <br />
+      <h2> Review and Ratings</h2>
+      <table className="complaint-table  ">
         <thead>
           <tr>
-            <th>Complaint Description</th>
-            <th>Status</th>
-            <th>Filed Date</th>
+            <th>Review and Comments </th>
+            <th>Rating</th>
+            <th>Review Date</th>
             <th>Product Name</th>
-            <th>Brand</th>
-            <th>Price</th>
+            <th>Product Brand</th>
+            <th>Product Price</th>
             <th>Product Image</th>
           </tr>
         </thead>
         <tbody>
-          {complaints.length > 0 ? (
-            complaints.map((ct) => (
-              <tr key={ct._id}>
-                {/* Wrap description properly */}
-                <td className="description-cell">
-                  <div className="description-content">{ct.description}</div>
-                </td>
-                <td>{ct.status}</td>
-                <td>{new Date(ct.fileddate).toLocaleDateString()}</td>
-                <td>{ct.productId?.name || "N/A"}</td>
-                <td>{ct.productId?.brand || "N/A"}</td>
-                <td>{ct.productId?.price ? `₹${ct.productId.price}` : "N/A"}</td>
-                <td>
-                {ct.productId?.productURL ? (
-                  <Link to={`/productdetails/${ct.productId._id}`}>
+          {ratings?.map((rt) => (
+            <tr key={rt._id}>
+              <td className="description-cell">
+                <div className="description-content">{rt.comment}</div>
+              </td>
+              <td>{rt.rating}</td>
+              <td>{new Date(rt.review_date).toLocaleDateString()}</td>
+
+              {/* Check if product details exist */}
+              <td>{rt.productId?.name || "N/A"}</td>
+              <td>{rt.productId?.brand || "N/A"}</td>
+              <td>{rt.productId?.price ? `₹${rt.productId.price}` : "N/A"}</td>
+              <td>
+                {rt.productId?.productURL ? (
+                  <Link to={`/productdetails/${rt.productId._id}`}>
                     <img
-                      src={ct.productId.productURL}
-                      alt={ct.productId.name}
+                      src={rt.productId.productURL}
+                      alt={rt.productId.name}
                       className="product-img"
                     />
                   </Link>
@@ -482,13 +331,8 @@ export const ViewAllComplaints = () => {
                   "No Image"
                 )}
               </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="7">No complaints found</td>
             </tr>
-          )}
+          ))}
         </tbody>
       </table>
     </div>

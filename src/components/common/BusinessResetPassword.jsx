@@ -1,11 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Button, Container, Card, Form } from "react-bootstrap";
+import { Button, Container, Card, Form ,} from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 
-export const ResetPassword = () => {
+export const BusinessResetPassword = () => {
   const token = useParams().token;
   const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ export const ResetPassword = () => {
       token: token,
       password: data.password,
     };
-    const res = await axios.post("/user/resetpassword", obj);
+    const res = await axios.post("business/resetPassword", obj);
     console.log(res.data);
 
     if (res.status === 200) {
@@ -39,21 +39,21 @@ export const ResetPassword = () => {
       });
 
       setTimeout(() => {
-        navigate("/login");
+        navigate("/businessLogin");
       }, 2500);
     }
   };
 
   const ValidationSchema = {
     newPasswordValidator: {
-      required: "Password is required *",
+      required: "New Password is required *",
       minLength: {
         value: 8,
         message: "Minimum length is 8",
       },
     },
     rpasswordValidator: {
-      required: "Repeat Password is required *",
+      required: "Confirm Password is required *",
       minLength: { value: 8, message: "Minimum length is 8 characters" },
       validate: (value) =>
         value === watch("password") || "Your password does not match",
@@ -88,7 +88,7 @@ export const ResetPassword = () => {
         style={{ maxWidth: "400px", width: "100%" }}
       >
         <Card.Body>
-          <h2 className="text-center mb-4">Sign In</h2>
+          <h2 className="text-center mb-4">Reset Password</h2>
           <Form onSubmit={handleSubmit(submitHandler)}>
             {/* Email Input */}
             <Form.Group className="mb-3">
@@ -102,7 +102,7 @@ export const ResetPassword = () => {
 
             {/* Password Input */}
             <Form.Group className="mb-3">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Confirm Password</Form.Label>
               <Form.Control
                 type="password"
                 {...register("rpassword", ValidationSchema.rpasswordValidator)}

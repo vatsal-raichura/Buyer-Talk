@@ -48,12 +48,12 @@
   }
   
   .btn-primary {
-    background-color: #c7fa54;
+    
     border: none;
     padding: 12px 20px;
     font-size: 16px;
-    border-radius: 25px;
-    color: black;
+    border-radius: 5px;
+    color: white;
   }
   
   .btn-secondary {

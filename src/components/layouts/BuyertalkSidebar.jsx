@@ -23,14 +23,10 @@ export const BuyertalkSidebar = () => {
         data-bs-theme="dark"
       >
         <div className="sidebar-brand">
-          <a href="./index.html" className="brand-link">
-            <img
-              src="../../dist/assets/img/AdminLTELogo.png"
-              // alt="AdminLTE Logo"
-              className="brand-image opacity-75 shadow"
-            />
+          <a href="./" className="brand-link">
+            
 
-            <span className="brand-text fw-light">AdminLTE 4</span>
+            <span className="brand-text fw-light"> BUYER TALK</span>
           </a>
         </div>
 

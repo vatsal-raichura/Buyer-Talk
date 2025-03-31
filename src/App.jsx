@@ -24,12 +24,46 @@ import { UpdateMyProduct } from "./components/products/UpdateMyProduct";
 import { BusinessLogin } from "./components/common/BusinessLogin";
 import { BusinessSignUp } from "./components/common/BusinessSignUp";
 import LandingPage from "./components/common/LandingPage";
-import { ReviewRating } from "./components/review_and_ratings/ReviewRating";
+
 import { ResetPassword } from "./components/common/ResetPassword";
 
 import { AddComplaints } from "./components/user/AddComplaints";
 import { ViewAllComplaints } from "./components/user/ViewAllComplaints";
 import { ForgotPassword } from "./components/common/ForgotPassword";
+import { AddReviewAndRatings } from "./components/review_and_ratings/AddReviewAndRatings";
+
+import { BusinessResetPassword } from "./components/common/BusinessResetPassword";
+import { BusinessForgotPassword } from "./components/common/BusinessForgotPassword";
+import { ViewAllReviewAndRatings } from "./components/review_and_ratings/ViewAllReviewAndRatings";
+import { ViewMyComplaints } from "./components/user/ViewMyComplaints";
+import { ViewMyReviewAndRatings } from "./components/review_and_ratings/ViewMyReviewAndRatings";
+import { ContactUs } from "./components/common/ContactUs";
+import { ProductDetails } from "./components/review_and_ratings/ProductDetails";
+import BusinessPrivateRoutes from "./hooks/BusinessPrivateRoutes";
+import UserPrivateRoutes from "./hooks/UserPrivateRoutes";
+
+axios.defaults.baseURL ="http://localhost:3000"
+
+const shouldApplyAppWrapper = (pathname)=>{
+  const noWrapperPaths =[
+    '/login',
+    '/signup',
+    '/businessSignup',
+    '/businessLogin',
+    '/reviewrating',
+    '/resetPassword',
+    '/forgotPassword',
+    '/businessResetPassword',
+    '/businessForgotPassword',
+    '/productdetails',
+    '/contactUs',
+    
+  ];
+  if(pathname === "/") return false;
+  return !noWrapperPaths.some(path=> pathname.startsWith(path));
+}
+
+
 // import {LandingPage} from './components/common/LandingPage'
 
 function App() {
@@ -46,19 +80,8 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <div
-      className={
-        location.pathname === "/login" ||
-        location.pathname === "/signup" ||
-        location.pathname === "/businessSignup" ||
-        location.pathname === "/businessLogin"|| 
-        location.pathname === "/reviewrating" || 
-        location.pathname === "/resetPassword/:token" ||
-        location.pathname === "/forgotPassword" ||
-        location.pathname === "/addcomplaint"
-          ? ""
-          : "app-wrapper" 
-      }
+    <div className={shouldApplyAppWrapper(location.pathname) ? "app-wrapper":"/user"}
+     
     >
       <Routes>
         <Route path="/login" element={<Login></Login>}></Route>
@@ -72,16 +95,39 @@ function App() {
           element={<BusinessLogin></BusinessLogin>}
         ></Route>
         <Route path="/" element={<LandingPage></LandingPage>}></Route>
+        <Route path="/contactUs" element={<ContactUs></ContactUs>}></Route>
         <Route path ="/resetPassword/:token" element={<ResetPassword/>}></Route>
         <Route path ="/forgotPassword" element={<ForgotPassword></ForgotPassword>}></Route>
-        <Route path="/addcomplaint" element={<AddComplaints></AddComplaints>}></Route>
-        <Route path="/viewallcomplaints" element={<ViewAllComplaints></ViewAllComplaints>}></Route>
+        <Route path ="/businessForgotPassword" element={<BusinessForgotPassword></BusinessForgotPassword>}></Route>
+        <Route path ="/businessResetPassword/:token" element={<BusinessResetPassword></BusinessResetPassword>}></Route>
+        <Route
+            path="productdetails/:productId"
+            element={<ProductDetails></ProductDetails>}
+          ></Route>
+        
         
 
 
 
-        <Route path="" element={<PrivateRoutes></PrivateRoutes>}>
-          <Route path="/business" element={<BuyertalkSidebar />}></Route>
+        <Route path="" element={<BusinessPrivateRoutes></BusinessPrivateRoutes>}>
+          <Route path="/business" element={<BuyertalkSidebar />}>
+          <Route path="products" element={<Products></Products>}></Route>
+            <Route path="products2" element={<Products2></Products2>}></Route>
+            <Route
+              path="viewmyproducts"
+              element={<ViewMyProducts></ViewMyProducts>}
+            ></Route>
+            <Route
+              path="updateproduct/:id"
+              element={<UpdateMyProduct></UpdateMyProduct>}
+            ></Route>
+          
+          
+          
+          </Route>
+          </Route>
+
+
           <Route
             path="/supportteam"
             element={<SupportTeamSidebar></SupportTeamSidebar>}
@@ -96,9 +142,33 @@ function App() {
             ></Route>
           </Route>
 
+          <Route path="" element={<UserPrivateRoutes></UserPrivateRoutes>}>
+
           <Route path="/user" element={<UserSidebar />}>
             <Route path="profile" element={<UserProfile></UserProfile>}></Route>
+            <Route
+            path="addreviewandrating"
+            element={<AddReviewAndRatings></AddReviewAndRatings>}
+          ></Route>
+          <Route
+            path="viewallreviewandratings"
+            element={<ViewAllReviewAndRatings></ViewAllReviewAndRatings>}
+          ></Route>
+           <Route
+            path="viewmyreviewandratings"
+            element={<ViewMyReviewAndRatings></ViewMyReviewAndRatings>}
+          ></Route>
+          
+          <Route path="addcomplaint" element={<AddComplaints></AddComplaints>}></Route>
+          <Route path="viewallcomplaints" element={<ViewAllComplaints></ViewAllComplaints>}></Route>
+          <Route
+              path="viewmycomplaints"
+              element={<ViewMyComplaints></ViewMyComplaints>}
+            ></Route>
             
+            
+            
+          </Route>
           </Route>
 
           <Route path="/product" element={<BuyertalkSidebar />}>
@@ -118,11 +188,8 @@ function App() {
             <Route path="demo" element={<Demo></Demo>}></Route>
           </Route>
 
-          <Route
-            path="/reviewrating"
-            element={<ReviewRating></ReviewRating>}
-          ></Route>
-        </Route>
+          
+        
       </Routes>
     </div>
   );

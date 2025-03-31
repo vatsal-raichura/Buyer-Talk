@@ -1,7 +1,7 @@
 import React from "react";
 import hamburgermenu from "../../assets/images/hamburgermenu.png";
 import { Bounce, toast, ToastContainer } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
@@ -49,14 +49,14 @@ export const BuyertalkNavbar = ({ toggleSidebar }) => {
             </a>
           </li>
           <li className="nav-item d-none d-md-block">
-            <a href="#" className="nav-link">
+            <Link to="/" className="nav-link">
               Home
-            </a>
+            </Link>
           </li>
           <li className="nav-item d-none d-md-block">
-            <a href="#" className="nav-link">
+            <Link to="/contactUs" className="nav-link">
               Contact
-            </a>
+            </Link>
           </li>
         </ul>
 

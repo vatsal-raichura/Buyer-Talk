@@ -7,7 +7,7 @@ import { Bounce, toast, ToastContainer } from "react-toastify";
 import { CustomLoader } from "../CustomLoader";
 
 
-export const ForgotPassword = () => {
+export const BusinessForgotPassword = () => {
 
   const [isLoading, setisLoading] = useState(false)  
 //   const navigate = useNavigate();
@@ -24,7 +24,7 @@ export const ForgotPassword = () => {
     try {
 
       setisLoading(true) 
-      const res = await axios.post("/user/forgotpassword", { email: data.email  });
+      const res = await axios.post("/business/forgotpassword", { email: data.email  });
       console.log(res.data);
       setisLoading(false)
 
@@ -69,7 +69,7 @@ export const ForgotPassword = () => {
 
   const ValidationSchema = {
     emailValidator: {
-      required: "Email is required *",
+      required: " Business Email is required *",
       pattern: {
         value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
         message: "Invalid email format",
@@ -93,7 +93,7 @@ export const ForgotPassword = () => {
         theme="dark"
         transition={Bounce}
       />
-      {isLoading == true  && <CustomLoader/>}
+      {isLoading == true  && <CustomLoader></CustomLoader>}
       <Card className="p-4 shadow-lg" style={{ maxWidth: "400px", width: "100%" }}>
         <Card.Body>
           <h2 className="text-center mb-4">Sign In</h2>
@@ -118,7 +118,7 @@ export const ForgotPassword = () => {
         
           </Form>
           <div className="text-center">
-            <Link to="/login">Back to Login</Link>
+            <Link to="/businessLogin">Back to Login</Link>
           </div>
         </Card.Body>
       </Card>

@@ -147,7 +147,7 @@ export const BusinessLogin = () => {
           </Form.Group>
 
           <div className="text-center my-2">
-            <Link to="/error">Forgot password?</Link>
+            <Link to="/businessForgotPassword">Forgot password?</Link>
           </div>
 
           {/* Submit Button */}
@@ -161,7 +161,7 @@ export const BusinessLogin = () => {
         </p>
 
         {/* Social Media Buttons */}
-        <div className="text-center mt-3">
+        {/* <div className="text-center mt-3">
           <p>or sign up with:</p>
           <div className="d-flex justify-content-center gap-2">
             {[
@@ -175,7 +175,7 @@ export const BusinessLogin = () => {
               </Button>
             ))}
           </div>
-        </div>
+        </div> */}
       </Card.Body>
     </Card>
   </Container>

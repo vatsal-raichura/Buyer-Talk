@@ -142,3 +142,8 @@
     max-width: 1170px;
   }
 }
+@media (max-width: 992px) {
+  .detail-box {
+   color: white;
+  }
+}
