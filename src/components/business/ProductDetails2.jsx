@@ -42,7 +42,6 @@
 // // //   );
 // // // };
 
-
 // // import axios from "axios";
 // // import React, { useEffect, useState } from "react";
 // // import { useParams } from "react-router-dom";
@@ -71,7 +70,7 @@
 // //     };
 
 // //     fetchProductDetails();
-    
+
 // //   }, [productId]);
 
 // //   if (isLoading) return <p className="loading-text">Loading product details...</p>;
@@ -93,12 +92,10 @@
 // //         </div>
 // //       </div>
 
-      
 // //       </div>
-    
+
 // //   );
 // // };
-
 
 // import axios from "axios";
 // import React, { useEffect, useState } from "react";
@@ -169,7 +166,6 @@
 //     </div>
 //   );
 // };
-
 
 // import axios from "axios";
 // import React, { useEffect, useState } from "react";
@@ -327,7 +323,7 @@
 //                       ⭐ {review.rating} / 5
 //                     </span >
 //                   </Card.Title>
-                  
+
 //                   <Card.Text style={{ fontSize: "1.1rem",marginLeft:"  15rem " }}>{review.comment}</Card.Text>
 //                   <small className="text-muted d-block mt-2">
 //                     Reviewed on{" "}
@@ -344,10 +340,6 @@
 //     </Container>
 //   );
 // };
-
-
-
-
 
 // import axios from "axios";
 // import React, { useEffect, useState } from "react";
@@ -535,14 +527,11 @@
 //                     <Card.Title className="fs-5" style={{marginRight:"2rem"}}>
 //                       <strong style={{marginRight:"2rem"}}>{complaint?.name || "User"}</strong>{" "}
 //                       <strong>Status:</strong> {complaint.status || "N/A"}
-                      
-                      
-                      
+
 //                     </Card.Title>
-                    
-                    
+
 //                     <Card.Text className="fs-5">{complaint.description || "No complaint text provided."}</Card.Text>
-                   
+
 //                     <span className="text-muted" style={{ fontSize: "1rem" }}>
 //                        compliant on {new Date(complaint.fileddate).toLocaleDateString()}
 //                     </span>
@@ -558,8 +547,6 @@
 //     </Container>
 //   );
 // };
-
-
 
 // import axios from "axios";
 // import React, { useEffect, useState } from "react";
@@ -1075,9 +1062,6 @@
 //   );
 // };
 
-
-
-
 // import axios from "axios";
 // import React, { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
@@ -1352,7 +1336,6 @@
 //     </Container>
 //   );
 // };
-
 
 // import axios from "axios";
 // import React, { useEffect, useState } from "react";
@@ -1653,7 +1636,6 @@
 //     </Container>
 //   );
 // };
-
 
 // import axios from "axios";
 // import React, { useEffect, useState } from "react";
@@ -1956,7 +1938,6 @@
 //     </Container>
 //   );
 // };
-
 
 // import axios from "axios";
 // import React, { useEffect, useState } from "react";
@@ -2265,7 +2246,6 @@
 //   );
 // };
 
-
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -2333,7 +2313,8 @@ export const ProductDetails2 = () => {
 
   const ratedReviews = reviews.filter((r) => r.rating != null);
   const averageRating = (
-    ratedReviews.reduce((sum, r) => sum + r.rating, 0) / ratedReviews.length || 0
+    ratedReviews.reduce((sum, r) => sum + r.rating, 0) / ratedReviews.length ||
+    0
   ).toFixed(1);
 
   const statusStyle = (status) => {
@@ -2395,7 +2376,9 @@ export const ProductDetails2 = () => {
     );
 
   const filteredComplaints = complaints.filter((c) =>
-    statusFilter === "All" ? true : c.status.toLowerCase() === statusFilter.toLowerCase()
+    statusFilter === "All"
+      ? true
+      : c.status.toLowerCase() === statusFilter.toLowerCase()
   );
 
   return (
@@ -2412,13 +2395,24 @@ export const ProductDetails2 = () => {
           </Col>
           <Col md={8}>
             <Card.Body>
-              <Card.Title style={{ fontSize: "2rem" }}>{product?.name}</Card.Title>
-              <Card.Text><strong>Description:</strong> {product?.description}</Card.Text>
-              <Card.Text><strong>Brand:</strong> {product?.brand}</Card.Text>
-              <Card.Text><strong>Price:</strong> ₹{product?.price}</Card.Text>
-              <Card.Text><strong>Category:</strong> {product?.category}</Card.Text>
-              <Card.Text>
-                <strong>Rating:</strong> ⭐ {averageRating} ({ratedReviews.length} reviews)
+              <Card.Title style={{fontSize:"3rem", width:"100%"}} as="h1">
+                {product?.name}
+              </Card.Title>
+              <Card.Text className="fs-5">
+                <strong>Description:</strong> {product?.description}
+              </Card.Text>
+              <Card.Text className="fs-5">
+                <strong>Brand:</strong> {product?.brand}
+              </Card.Text>
+              <Card.Text className="fs-5">
+                <strong>Price:</strong> ₹{product?.price}
+              </Card.Text>
+              <Card.Text className="fs-5">
+                <strong>Category:</strong> {product?.category}
+              </Card.Text>
+              <Card.Text className="fs-5">
+                <strong>Rating:</strong> ⭐ {averageRating} (
+                {ratedReviews.length} reviews)
               </Card.Text>
             </Card.Body>
           </Col>
@@ -2462,20 +2456,33 @@ export const ProductDetails2 = () => {
         <Card className="shadow-sm mb-4">
           <Card.Body>
             <h5>Customer Reviews</h5>
-            {(expanded ? filteredReviews : filteredReviews.slice(0, 3)).map((review) => (
-              <Card key={review._id} className="mb-2">
-                <Card.Body>
-                  <Card.Title className="d-flex justify-content-between">
-                    <span>{review.name || "Anonymous"}</span>
-                    <span className="text-warning">⭐ {review.rating} / 5</span>
-                  </Card.Title>
-                  <Card.Text>{review.comment}</Card.Text>
-                  <small className="text-muted">
-                    Reviewed on {new Date(review.review_date).toLocaleDateString()}
-                  </small>
-                </Card.Body>
-              </Card>
-            ))}
+            {(expanded ? filteredReviews : filteredReviews.slice(0, 3)).map(
+              (review) => (
+                <Card key={review._id} className="mb-2 border">
+                  <Card.Body>
+                    <Card.Title className="">
+                      <div style={{ margin: "0rem 2rem 0.5rem 0rem" }} >
+                        <strong> User: </strong> {review.name || "Anonymous"}{" "}
+                        
+                      </div>
+                      <span style={{ margin: "0rem 2rem 0.5rem 0rem" }} className="fs-6">
+                        Comment : {review.comment}
+                      </span>
+                      <span
+                        className="text-warning fs-6"
+                        style={{ margin: "0rem 2rem 2rem 0rem" }} 
+                      >
+                        ⭐ {review.rating} / 5
+                      </span>
+                      <small className="text-muted d-block mt-3 fs-7">
+                        Reviewed on{" "}
+                        {new Date(review.review_date).toLocaleDateString()}
+                      </small>
+                    </Card.Title>
+                  </Card.Body>
+                </Card>
+              )
+            )}
             {filteredReviews.length > 3 && (
               <Button
                 variant="link"
@@ -2493,23 +2500,39 @@ export const ProductDetails2 = () => {
         <Card className="shadow-sm">
           <Card.Body>
             <h5>Customer Complaints</h5>
-            {(expandedComplaints ? filteredComplaints : filteredComplaints.slice(0, 3)).map((complaint) => {
+            {(expandedComplaints
+              ? filteredComplaints
+              : filteredComplaints.slice(0, 3)
+            ).map((complaint) => {
               const { color, icon } = statusStyle(complaint.status || "");
               const isOpen = complaint.status.toLowerCase() === "open";
-              const isEscalated = complaint.status.toLowerCase() === "escalated";
+              const isEscalated =
+                complaint.status.toLowerCase() === "escalated";
               const showButtons = isOpen || isEscalated;
 
               return (
-                <Card key={complaint._id} className="mb-3 border" style={{ borderColor: color }}>
+                <Card
+                  key={complaint._id}
+                  className="mb-3 border"
+                  style={{ borderColor: color }}
+                >
                   <Card.Body>
                     <Card.Title>
-                      <span style={{ color, fontWeight: "bold" }}>{icon} {complaint.status}</span>
-                      <div><strong>User:</strong> {complaint?.userId?.firstname || "User"}</div>
+                      <div>
+                        <strong>User:</strong> {complaint.name || "User"}
+                      </div>
+
+                      <Card.Text style={{ marginTop: "1rem" }} className="fs-6">
+                        Description : {complaint.description}
+                      </Card.Text>
+                      <small className="text-muted mr-4 fs-7 ">
+                        Filed on{" "}
+                        {new Date(complaint.fileddate).toLocaleDateString()}
+                      </small>
+                      <span style={{ color, fontWeight: "bold" }}>
+                        {icon} {complaint.status}
+                      </span>
                     </Card.Title>
-                    <Card.Text>{complaint.description}</Card.Text>
-                    <small className="text-muted">
-                      Filed on {new Date(complaint.fileddate).toLocaleDateString()}
-                    </small>
 
                     {showButtons && (
                       <>
@@ -2529,14 +2552,21 @@ export const ProductDetails2 = () => {
                           {isOpen && (
                             <Button
                               variant="warning"
-                              onClick={() => updateComplaintStatus(complaint._id, "escalated")}
+                              onClick={() =>
+                                updateComplaintStatus(
+                                  complaint._id,
+                                  "escalated"
+                                )
+                              }
                             >
                               Escalate
                             </Button>
                           )}
                           <Button
                             variant="success"
-                            onClick={() => updateComplaintStatus(complaint._id, "resolved")}
+                            onClick={() =>
+                              updateComplaintStatus(complaint._id, "resolved")
+                            }
                           >
                             Resolve
                           </Button>
@@ -2544,15 +2574,22 @@ export const ProductDetails2 = () => {
                       </>
                     )}
 
-                    {["resolved", "escalated"].includes((complaint.status || "").toLowerCase()) &&
+                    {["resolved", "escalated"].includes(
+                      (complaint.status || "").toLowerCase()
+                    ) &&
                       complaint.resolutionMessage && (
                         <Alert
-                          variant={complaint.status.toLowerCase() === "resolved" ? "success" : "danger"}
+                          variant={
+                            complaint.status.toLowerCase() === "resolved"
+                              ? "success"
+                              : "danger"
+                          }
                           className="mt-2"
                         >
-                          <strong>Response:</strong> {complaint.resolutionMessage}
+                          <strong>Response:</strong>{" "}
+                          {complaint.resolutionMessage}
                         </Alert>
-                    )}
+                      )}
                   </Card.Body>
                 </Card>
               );
