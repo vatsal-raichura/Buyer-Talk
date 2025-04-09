@@ -449,10 +449,11 @@ export const ViewAllComplaints = () => {
           <tr>
             <th>Complaint Description</th>
             <th>Status</th>
+            <th>Response</th>
+
             <th>Filed Date</th>
             <th>Product Name</th>
-            <th>Brand</th>
-            <th>Price</th>
+            
             <th>Product Image</th>
           </tr>
         </thead>
@@ -465,10 +466,10 @@ export const ViewAllComplaints = () => {
                   <div className="description-content">{ct.description}</div>
                 </td>
                 <td>{ct.status}</td>
+                <td>{ct.resolutionMessage || "N|A"}</td>
                 <td>{new Date(ct.fileddate).toLocaleDateString()}</td>
                 <td>{ct.productId?.name || "N/A"}</td>
-                <td>{ct.productId?.brand || "N/A"}</td>
-                <td>{ct.productId?.price ? `₹${ct.productId.price}` : "N/A"}</td>
+                
                 <td>
                 {ct.productId?.productURL ? (
                   <Link to={`/productdetails/${ct.productId._id}`}>

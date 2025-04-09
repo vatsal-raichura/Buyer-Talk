@@ -42,6 +42,9 @@ import { ProductDetails } from "./components/review_and_ratings/ProductDetails";
 import BusinessPrivateRoutes from "./hooks/BusinessPrivateRoutes";
 import UserPrivateRoutes from "./hooks/UserPrivateRoutes";
 
+import BusinessReviews from "./components/business/BusinessReviews";
+import { ProductDetails2 } from "./components/business/ProductDetails2";
+
 axios.defaults.baseURL ="http://localhost:3000"
 
 const shouldApplyAppWrapper = (pathname)=>{
@@ -120,6 +123,14 @@ function App() {
             <Route
               path="updateproduct/:id"
               element={<UpdateMyProduct></UpdateMyProduct>}
+            ></Route>
+            <Route
+              path="ratings"
+              element={<BusinessReviews></BusinessReviews>}
+            ></Route>
+            <Route
+              path="productdetails2/:productId"
+              element={<ProductDetails2></ProductDetails2>}
             ></Route>
           
           
