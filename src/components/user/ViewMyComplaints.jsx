@@ -206,7 +206,7 @@ const getStatusDetails = (status) => {
                 <td>{ct.productId?.name || "No product found"}</td>
                 
                
-                <td>
+                <td >
                                 {ct.productId?.productURL ? (
                                   <Link to={`/user/productdetails/${ct.productId._id}`}>
                                     <img
