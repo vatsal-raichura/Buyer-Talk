@@ -242,18 +242,8 @@ export const UserSidebar = () => {
                     </Link>
               
               </li>
-              <li className="nav-item">
-                <Link to="/user/viewAllLawyers" className="nav-link">
-                  <i className="nav-icon bi bi-circle" />
-                  <p>View All Lawyers</p>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/user/viewMyPayments" className="nav-link">
-                  <i className="nav-icon bi bi-circle" />
-                  <p>My Payments</p>
-                </Link>
-              </li>
+              
+              
               <li className="nav-item">
                 <ul className="nav nav-treeview">
                   <li className="nav-item">

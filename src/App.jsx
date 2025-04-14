@@ -53,6 +53,7 @@ import { BusinessDetails } from "./components/common/BusinessDetails";
 import { BusinessProductDetails } from "./components/common/BusinessProductDetails";
 import { AdminProductDetails } from "./components/common/AdminProductDetails";
 import AdminUserManagement from "./components/common/AdminUserManagement";
+import { BusinessProfile } from "./components/business/BusinessProfile";
 
 axios.defaults.baseURL ="http://localhost:3000"
 
@@ -145,6 +146,11 @@ function App() {
               path="productdetails2/:productId"
               element={<ProductDetails2></ProductDetails2>}
             ></Route>
+            <Route
+              path="businessprofile"
+              element={<BusinessProfile></BusinessProfile>}
+            ></Route>
+          
           
           
           
@@ -169,7 +175,7 @@ function App() {
           <Route path="" element={<UserPrivateRoutes></UserPrivateRoutes>}>
 
           <Route path="/user" element={<UserSidebar />}>
-            <Route path="profile" element={<UserProfile></UserProfile>}></Route>
+           
             <Route
             path="addreviewandrating"
             element={<AddReviewAndRatings></AddReviewAndRatings>}

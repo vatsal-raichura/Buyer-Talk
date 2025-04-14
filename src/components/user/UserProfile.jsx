@@ -29,7 +29,7 @@ export const UserProfile = () => {
           <h2>Get in Touch</h2>
           <p>
             Have questions or need assistance? Email us at{" "}
-            <a href="mailto:rajinternship9@gmail.com">rajinternship9@gmail.com</a>
+            <a href="veerraar325@gmail.com">veerraar325@gmail.com</a>
           </p>
           <p>Join us in making informed consumer choices.</p>
         </div>
