@@ -150,6 +150,20 @@ export const ViewMyComplaints = () => {
     }
 }
 
+const getStatusDetails = (status) => {
+  switch (status?.toLowerCase()) {
+    case "open":
+      return { icon: "🟡", color: "#ffc107" };
+    case "escalated":
+      return { icon: "🔴", color: "#dc3545" };
+    case "resolved":
+      return { icon: "✅", color: "#198754" };
+    default:
+      return { icon: "❔", color: "gray" };
+  }
+};
+
+
   return (
     <div className="table-container"> {/* ✅ Uses the same styling */}
     <ToastContainer position="top-left" autoClose={5000} hideProgressBar={false} theme="dark" transition={Bounce} />
@@ -162,6 +176,9 @@ export const ViewMyComplaints = () => {
           <tr>
             <th>Complaint Description</th>
             <th>Status</th>
+
+            
+
             <th>Response</th>
 
             <th>Filed Date</th>
@@ -179,7 +196,11 @@ export const ViewMyComplaints = () => {
                 <td className="description-cell">
                   <div className="description-content">{ct.description}</div>
                 </td>
-                <td>{ct.status}</td>
+                <td>
+  <span className={`status-badge ${ct.status?.toLowerCase()}`}>
+    {getStatusDetails(ct.status).icon} {ct.status}
+  </span>
+</td>
                 <td>{ct.resolutionMessage || "N|A"}</td>  
                 <td>{new Date(ct.fileddate).toLocaleDateString()}</td>
                 <td>{ct.productId?.name || "No product found"}</td>
@@ -187,7 +208,7 @@ export const ViewMyComplaints = () => {
                
                 <td>
                                 {ct.productId?.productURL ? (
-                                  <Link to={`/productdetails/${ct.productId._id}`}>
+                                  <Link to={`/user/productdetails/${ct.productId._id}`}>
                                     <img
                                       src={ct.productId.productURL}
                                       alt={ct.productId.name}

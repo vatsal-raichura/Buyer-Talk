@@ -439,6 +439,19 @@ export const ViewAllComplaints = () => {
     getAllComplaints();
   }, []);
 
+  const getStatusDetails = (status) => {
+    switch (status?.toLowerCase()) {
+      case "open":
+        return { icon: "🟡", color: "#ffc107" };
+      case "escalated":
+        return { icon: "🔴", color: "#dc3545" };
+      case "resolved":
+        return { icon: "✅", color: "#198754" };
+      default:
+        return { icon: "❔", color: "gray" };
+    }
+  };
+
   return (
     <div className="table-container">
       
@@ -465,14 +478,18 @@ export const ViewAllComplaints = () => {
                 <td className="description-cell">
                   <div className="description-content">{ct.description}</div>
                 </td>
-                <td>{ct.status}</td>
+                <td>
+                <span className={`status-badge ${ct.status?.toLowerCase()}`}>
+            {getStatusDetails(ct.status).icon} {ct.status}
+             </span>
+            </td>
                 <td>{ct.resolutionMessage || "N|A"}</td>
                 <td>{new Date(ct.fileddate).toLocaleDateString()}</td>
                 <td>{ct.productId?.name || "N/A"}</td>
                 
                 <td>
                 {ct.productId?.productURL ? (
-                  <Link to={`/productdetails/${ct.productId._id}`}>
+                  <Link to={`/user/productdetails/${ct.productId._id}`}>
                     <img
                       src={ct.productId.productURL}
                       alt={ct.productId.name}

@@ -101,7 +101,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CustomLoader } from "../CustomLoader";
-import "../../assets/complaints2.css" // ✅ Applying same CSS from ViewAllComplaints
+import "../../assets/review2.css" // ✅ Applying same CSS from ViewAllComplaints
 import { get } from "react-hook-form";
 import { Container, Card, Form, Button } from "react-bootstrap";
 import { Bounce, toast, ToastContainer } from "react-toastify";
@@ -149,6 +149,36 @@ export const ViewMyReviewAndRatings = () => {
       }
   }
 
+  // const renderStars = (rating) => {
+  //   const filledStars = "★".repeat(Math.floor(rating));
+  //   const emptyStars = "☆".repeat(5 - Math.floor(rating));
+  //   return filledStars + emptyStars;
+  // };
+
+  const renderStars = (rating) => {
+    return "★".repeat(rating) + "☆".repeat(5 - rating);
+  };
+
+  
+  const getStarColor = (rating) => {
+    switch (rating) {
+      case 5:
+        return "#4CAF50"; // Green
+      case 4:
+        return "#2196F3"; // Blue
+      case 3:
+        return "#f1c40f"; // Amber
+      case 2:
+        return "#e67e22"; // Orange
+      case 1:
+        return "#F44336"; // Red
+      default:
+        return "#ccc"; // Gray fallback
+    }
+  };
+  
+  
+
   return (
     <div className="table-container"> {/* ✅ Uses the same styling */}
     <ToastContainer position="top-left" autoClose={5000} hideProgressBar={false} theme="dark" transition={Bounce} />
@@ -174,7 +204,13 @@ export const ViewMyReviewAndRatings = () => {
                 <td className="description-cell">
                   <div className="description-content">{rt.comment}</div>
                   </td>
-              <td>{rt.rating}</td>
+                  <td style={{ fontSize: "1.3rem", fontWeight: "bold" }}>
+  <span style={{ color: getStarColor(rt.rating) }}>
+    {renderStars(rt.rating)}
+  </span>{" "}
+  ({rt.rating})
+</td>
+
               <td>{new Date(rt.review_date).toLocaleDateString()}</td>
 
               {/* Check if product details exist */}
@@ -183,7 +219,7 @@ export const ViewMyReviewAndRatings = () => {
               <td>{rt.productId?.price ? `₹${rt.productId.price}` : "N/A"}</td>
               <td>
                               {rt.productId?.productURL ? (
-                                <Link to={`/productdetails/${rt.productId._id}`}>
+                                <Link to={`/user/productdetails/${rt.productId._id}`}>
                                   <img
                                     src={rt.productId.productURL}
                                     alt={rt.productId.name}

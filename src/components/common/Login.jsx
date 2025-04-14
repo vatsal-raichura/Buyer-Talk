@@ -55,20 +55,38 @@ export const Login = () => {
         }
       }
     } catch (error) {
-      // alert("Login failed");
-      console.log(error)
-      toast.error('  Invalid Credentials !!', {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
+      const status = error?.response?.status;
+      const message = error?.response?.data?.message;
+
+      if (status === 403) {
+        toast.error("Your account is blocked by the admin.", {
+          position: "top-center",
+          autoClose: 5000,
+          theme: "dark",
+          transition: Bounce,
         });
-        
+      } else if (status === 404) {
+        toast.error("Email not found. Please register first.", {
+          position: "top-center",
+          autoClose: 5000,
+          theme: "dark",
+          transition: Bounce,
+        });
+      } else if (status === 401) {
+        toast.error("Invalid credentials!", {
+          position: "top-center",
+          autoClose: 5000,
+          theme: "dark",
+          transition: Bounce,
+        });
+      } else {
+        toast.error("Something went wrong. Please try again.", {
+          position: "top-center",
+          autoClose: 5000,
+          theme: "dark",
+          transition: Bounce,
+        });
+      }
     }
   };
 

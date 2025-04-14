@@ -33,13 +33,13 @@
   }
   
   /* Set fixed column widths */
-  th:nth-child(1), td:nth-child(1) { width: 22%; } /* Description column */
+  th:nth-child(1), td:nth-child(1) { width: 18%; } /* Description column */
   th:nth-child(2), td:nth-child(2) { width: 10%; }
-  th:nth-child(3), td:nth-child(3) { width: 12%; }
+  th:nth-child(3), td:nth-child(3) { width: 30%; }
   th:nth-child(4), td:nth-child(4) { width: 12%; }
   th:nth-child(5), td:nth-child(5) { width: 10%; }
   th:nth-child(6), td:nth-child(6) { width: 10%; }
-  th:nth-child(7), td:nth-child(7) { width: 24%; } /* Image column */
+  th:nth-child(7), td:nth-child(7) { width: 10%; } /* Image column */
   
   /* Complaint Description Styling */
   .description-cell {
@@ -78,5 +78,32 @@
   
   .product-img:hover {
     transform: scale(1.1);
+  }
+  
+  .status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: capitalize;
+  }
+  
+  .status-badge.open {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+  }
+  
+  .status-badge.escalated {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+  
+  .status-badge.resolved {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
   }
   

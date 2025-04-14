@@ -44,6 +44,15 @@ import UserPrivateRoutes from "./hooks/UserPrivateRoutes";
 
 import BusinessReviews from "./components/business/BusinessReviews";
 import { ProductDetails2 } from "./components/business/ProductDetails2";
+import { SelectLoginRole } from "./components/common/SelectLoginRole";
+import { SelectRole } from "./components/common/SelectRole";
+import { AdminDashboard } from "./components/common/AdminDashboard";
+import { AdminSidebar } from "./components/layouts/AdminSidebar";
+import { LandingPageDemo } from "./components/common/LandingPageDemo";
+import { BusinessDetails } from "./components/common/BusinessDetails";
+import { BusinessProductDetails } from "./components/common/BusinessProductDetails";
+import { AdminProductDetails } from "./components/common/AdminProductDetails";
+import AdminUserManagement from "./components/common/AdminUserManagement";
 
 axios.defaults.baseURL ="http://localhost:3000"
 
@@ -97,16 +106,20 @@ function App() {
           path="/businessLogin"
           element={<BusinessLogin></BusinessLogin>}
         ></Route>
+         <Route path="/loginRole" element={<SelectLoginRole></SelectLoginRole>}></Route>
+         <Route path="/signUpRole" element={<SelectRole></SelectRole>}></Route>
+
         <Route path="/" element={<LandingPage></LandingPage>}></Route>
         <Route path="/contactUs" element={<ContactUs></ContactUs>}></Route>
         <Route path ="/resetPassword/:token" element={<ResetPassword/>}></Route>
         <Route path ="/forgotPassword" element={<ForgotPassword></ForgotPassword>}></Route>
         <Route path ="/businessForgotPassword" element={<BusinessForgotPassword></BusinessForgotPassword>}></Route>
         <Route path ="/businessResetPassword/:token" element={<BusinessResetPassword></BusinessResetPassword>}></Route>
-        <Route
-            path="productdetails/:productId"
-            element={<ProductDetails></ProductDetails>}
-          ></Route>
+        <Route path="/landingpagedemo" element={<LandingPageDemo></LandingPageDemo>}></Route>
+        
+       
+       
+        
         
         
 
@@ -176,7 +189,14 @@ function App() {
               path="viewmycomplaints"
               element={<ViewMyComplaints></ViewMyComplaints>}
             ></Route>
-            
+            <Route
+            path="productdetails/:productId"
+            element={<ProductDetails></ProductDetails>}
+          ></Route>
+          <Route path="userprofile" element={<UserProfile></UserProfile>}></Route>
+           
+
+
             
             
           </Route>
@@ -195,9 +215,29 @@ function App() {
             ></Route>
           </Route>
 
+          <Route path="/admin" element={<AdminSidebar></AdminSidebar>}>
+          <Route path="adminDashboard" element={<AdminDashboard></AdminDashboard>}></Route>
+          <Route path="businessDetails" element={<BusinessDetails></BusinessDetails>}></Route>
+          <Route path="businessProductDetails/:businessId" element={<BusinessProductDetails></BusinessProductDetails>}></Route>
+          <Route path="adminProductDetails/:productId" element={<AdminProductDetails></AdminProductDetails>}></Route>
+          <Route path="getUsers" element={<AdminUserManagement></AdminUserManagement>}></Route>
+          
+
+
+          
+          </Route>
+
+          
+
+
+
+          
+
           <Route path="/buyer" element={<BuyertalkSidebar></BuyertalkSidebar>}>
             <Route path="demo" element={<Demo></Demo>}></Route>
+           
           </Route>
+          
 
           
         

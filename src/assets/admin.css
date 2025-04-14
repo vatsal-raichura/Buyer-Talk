@@ -1,0 +1,58 @@
+.dashboard-card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3) !important;
+    cursor: pointer;
+  }
+  
+  .dashboard-chart-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
+    cursor: pointer;
+  }
+
+  .product-col {
+    width: 10%;
+  }
+  .description-col {
+    width: 40%;
+  }
+
+  .card {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .card {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-title {
+    text-transform: capitalize;
+  }
+  
+  .card-body strong {
+    display: inline-block;
+    min-width: 85px;
+  }
+
+  .user-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: #f9f9f9;
+  }
+  
+  .user-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  
+  
