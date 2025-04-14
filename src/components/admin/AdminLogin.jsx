@@ -10,7 +10,7 @@ import { Bounce, toast, ToastContainer } from "react-toastify";
 
 
 
-export const BusinessLogin = () => {
+export const AdminLogin = () => {
 
   const {
     register,
@@ -33,7 +33,7 @@ export const BusinessLogin = () => {
 
     setisLoading(true)
    
-    const res = await axios.post("/business/login", data)
+    const res = await axios.post("/admin/adminLogin", data)
     setisLoading(false)
     console.log(res.data)
     if(res.status === 200){
@@ -55,8 +55,8 @@ export const BusinessLogin = () => {
 
       
 
-      if(res.data.data.roleId.name === "business"){
-        setTimeout(()=>{navigate("/business/businessprofile")},2500)
+      if(res.data.data.roleId.name === "admin"){
+        setTimeout(()=>{navigate("/admin/adminDashboard")},2500)
       }
     }}
     catch (error) {
@@ -146,7 +146,7 @@ export const BusinessLogin = () => {
   >
     <Card className="p-4 shadow-lg" style={{ maxWidth: "400px", width: "100%" }}>
       <Card.Body>
-        <h2 className="text-uppercase text-center mb-4">Business Sign In</h2>
+        <h2 className="text-uppercase text-center mb-4">Admin Sign In</h2>
         <Form onSubmit={handleSubmit(submitHandler)}>
           {/* Email Input */}
           <Form.Group className="mb-3">
@@ -178,10 +178,7 @@ export const BusinessLogin = () => {
           </Button>
         </Form>
 
-        <p className="text-center mt-3">
-          Don't have an account? <Link to="/businessSignup">Register here</Link>
-        </p>
-
+        
         {/* Social Media Buttons */}
         {/* <div className="text-center mt-3">
           <p>or sign up with:</p>

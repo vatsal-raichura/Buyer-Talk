@@ -54,6 +54,7 @@ import { BusinessProductDetails } from "./components/common/BusinessProductDetai
 import { AdminProductDetails } from "./components/common/AdminProductDetails";
 import AdminUserManagement from "./components/common/AdminUserManagement";
 import { BusinessProfile } from "./components/business/BusinessProfile";
+import { AdminLogin } from "./components/admin/AdminLogin";
 
 axios.defaults.baseURL ="http://localhost:3000"
 
@@ -70,6 +71,7 @@ const shouldApplyAppWrapper = (pathname)=>{
     '/businessForgotPassword',
     '/productdetails',
     '/contactUs',
+    '/adminLogin'
     
   ];
   if(pathname === "/") return false;
@@ -117,6 +119,8 @@ function App() {
         <Route path ="/businessForgotPassword" element={<BusinessForgotPassword></BusinessForgotPassword>}></Route>
         <Route path ="/businessResetPassword/:token" element={<BusinessResetPassword></BusinessResetPassword>}></Route>
         <Route path="/landingpagedemo" element={<LandingPageDemo></LandingPageDemo>}></Route>
+        <Route path="/adminLogin" element={<AdminLogin></AdminLogin>}></Route>
+
         
        
        

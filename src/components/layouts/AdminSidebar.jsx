@@ -70,44 +70,12 @@ export const AdminSidebar = () => {
                       <p>Business Providers</p>
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <Link to="/user/addQuery" className="nav-link">
-                      <i className="nav-icon bi bi-circle" />
-                      <p> Add Legal Query</p>
-                    </Link>
-                  </li>
+                 
                 </ul>
               </li>
-              <li className="nav-item">
-                <Link to="/user/viewMyQueries" className="nav-link">
-                  <i className="nav-icon bi bi-palette" />
-                  <p>View My Queries</p>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/user/addReview" className="nav-link">
-                  <i className="nav-icon bi bi-circle" />
-                  <p>Add Review</p>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/user/viewMyReviews" className="nav-link">
-                  <i className="nav-icon bi bi-circle" />
-                  <p>View My Reviews</p>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/user/viewAllLawyers" className="nav-link">
-                  <i className="nav-icon bi bi-circle" />
-                  <p>View All Lawyers</p>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/user/viewMyPayments" className="nav-link">
-                  <i className="nav-icon bi bi-circle" />
-                  <p>My Payments</p>
-                </Link>
-              </li>
+              
+              
+              
               <li className="nav-item">
                 <ul className="nav nav-treeview">
                   <li className="nav-item">

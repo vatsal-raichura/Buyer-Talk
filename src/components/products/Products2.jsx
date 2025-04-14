@@ -64,7 +64,7 @@ export const Products2 = () => {
               transition: Bounce,
               });
       
-            setTimeout(()=>{navigate("/business")},2500)
+            setTimeout(()=>{navigate("/business/businessprofile")},2500)
 
     }
 

@@ -50,7 +50,7 @@ export const Login = () => {
 
         if (res.data.data.roleId.name === "user") {
           setTimeout(() => {
-            navigate("/user");
+            navigate("/user/userprofile");
           }, 2500);
         }
       }

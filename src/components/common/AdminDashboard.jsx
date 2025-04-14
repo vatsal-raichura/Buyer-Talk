@@ -755,19 +755,25 @@ export const AdminDashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
-      const [productRes, ratingRes, complaintRes, userRes, businessRes] = await Promise.all([
+      const [productRes, ratingRes, complaintRes, userRes, businessRes,Res] = await Promise.all([
         axios.get("/product/product"),
         axios.get("/rating/ratings"),
         axios.get("/complaint/complaints"),
         axios.get("/users"),
         axios.get("/business/businesses"),
+        axios.get("/admin/stats"),
+       
+
       ]);
+      console.log(Res.data)
 
       const products = productRes.data.data || [];
       const ratings = ratingRes.data.data || [];
       const complaints = complaintRes.data.data || [];
       const users = userRes.data.data || [];
       const businesses = businessRes.data.data || [];
+      const stats1 = Res.data || [];
+      console.log(stats1)
 
       const reviewMap = {};
       const ratingMap = {};
@@ -816,7 +822,7 @@ export const AdminDashboard = () => {
         subtitle: "Comparison of active users and inactive users",
         content: (
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={[{ name: 'Active Users', count: userData.activeUsers }, { name: 'Inactive Users', count: userData.inactiveUsers }]}>
+            <BarChart data={[{ name: 'Active Users', count: stats.activeUsers }, { name: 'Inactive Users', count: stats.inactiveUsers }]}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
               <YAxis />
@@ -844,6 +850,15 @@ export const AdminDashboard = () => {
         const businessName = p.businessId?.businessname || "Unknown";
         businessProductMap[businessName] = (businessProductMap[businessName] || 0) + 1;
       });
+
+      const fetchActiveInactiveData = async () => {
+        try {
+          const response = await axios.get('/admin/active-inactive-users');
+          setUserData(response.data);
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      };
       
       
     
@@ -913,30 +928,67 @@ export const AdminDashboard = () => {
       title: "Weekly Complaints Trend",
       subtitle: "Complaints submitted each week",
       content: (
+        // <LineChart
+        //   width={500}
+        //   height={300}
+        //   data={weeklyComplaintsData}  // use your actual data here
+        //   margin={{ top: 20, right: 30, left: 30, bottom: 30 }}
+        // >
+        //   <XAxis
+        //     dataKey="week"
+        //     interval={0}
+        //     tick={{ fontSize: 12 }}
+        //     angle={-15}
+        //     textAnchor="end"
+        //   />
+        //   <YAxis />
+        //   <Tooltip />
+        //   <Legend />
+        //   <Line
+        //     type="monotone"
+        //     dataKey="count"
+        //     stroke="#FF8042"
+        //     strokeWidth={2}
+        //     dot={true}
+        //   />
+        // </LineChart>
         <LineChart
-          width={500}
-          height={300}
-          data={weeklyComplaintsData}  // use your actual data here
-          margin={{ top: 20, right: 30, left: 30, bottom: 30 }}
-        >
-          <XAxis
-            dataKey="week"
-            interval={0}
-            tick={{ fontSize: 12 }}
-            angle={-15}
-            textAnchor="end"
-          />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line
-            type="monotone"
-            dataKey="count"
-            stroke="#FF8042"
-            strokeWidth={2}
-            dot={true}
-          />
-        </LineChart>
+  width={500}
+  height={300}
+  data={weeklyComplaintsData}
+  margin={{ top: 20, right: 30, left: 30, bottom: 30 }}
+>
+  <CartesianGrid stroke={darkMode ? "#444" : "#ccc"} />
+  <XAxis
+    dataKey="week"
+    interval={0}
+    tick={{ fontSize: 12, fill: darkMode ? "#fff" : "#000" }}
+    angle={-15}
+    textAnchor="end"
+    stroke={darkMode ? "#aaa" : "#000"}
+  />
+  <YAxis
+    tick={{ fill: darkMode ? "#fff" : "#000" }}
+    stroke={darkMode ? "#aaa" : "#000"}
+  />
+  <Tooltip
+    contentStyle={{
+      backgroundColor: darkMode ? "#333" : "#fff",
+      color: darkMode ? "#fff" : "#000"
+    }}
+    labelStyle={{ color: darkMode ? "#ccc" : "#000" }}
+    itemStyle={{ color: darkMode ? "#fff" : "#000" }}
+  />
+  <Legend wrapperStyle={{ color: darkMode ? "#fff" : "#000" }} />
+  <Line
+    type="monotone"
+    dataKey="count"
+    stroke="#FF8042"
+    strokeWidth={2}
+    dot={true}
+  />
+</LineChart>
+
       )
     },
     {

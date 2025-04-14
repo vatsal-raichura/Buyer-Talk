@@ -642,7 +642,7 @@ export const AddReviewAndRatings = () => {
         toast.success("Review and Rating added successfully!", {
           theme: "dark",
         });
-        setTimeout(() => navigate("/user"), 2000);
+        setTimeout(() => navigate("/user/userprofile"), 2000);
       } else {
         toast.error("Review and Rating not added!");
       }
