@@ -22,7 +22,16 @@ export const ContactUs = () => {
 
       if (res.status === 200) {
         toast.success('Message sent successfully!', { transition: Bounce, theme: "dark" });
-        setTimeout(() => navigate("/user"), 2500);
+        const role = localStorage.getItem("role")
+        setTimeout(() => {
+          if(role==="user"){
+            navigate("/user/userprofile")
+          }  else if(role==="business"){
+            navigate("/business/businessprofile")
+          } else{
+            navigate("/")
+          }
+        }, 2500);
       }
     } catch (error) {
       setisLoading(false);

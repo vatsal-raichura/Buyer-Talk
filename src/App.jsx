@@ -70,7 +70,7 @@ const shouldApplyAppWrapper = (pathname)=>{
     '/businessResetPassword',
     '/businessForgotPassword',
     '/productdetails',
-    '/contactUs',
+    '/contactus',
     '/adminLogin'
     
   ];
@@ -113,7 +113,7 @@ function App() {
          <Route path="/signUpRole" element={<SelectRole></SelectRole>}></Route>
 
         <Route path="/" element={<LandingPage></LandingPage>}></Route>
-        <Route path="/contactUs" element={<ContactUs></ContactUs>}></Route>
+        <Route path="/contactus" element={<ContactUs></ContactUs>}></Route>
         <Route path ="/resetPassword/:token" element={<ResetPassword/>}></Route>
         <Route path ="/forgotPassword" element={<ForgotPassword></ForgotPassword>}></Route>
         <Route path ="/businessForgotPassword" element={<BusinessForgotPassword></BusinessForgotPassword>}></Route>

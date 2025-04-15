@@ -149,7 +149,7 @@ export const BuyertalkNavbar = ({ toggleSidebar, isSidebarOpen }) => {
               />
             </button>
           )}
-          <Link className="navbar-brand text-white fw-bold" to="/user/userDashBoard">
+          <Link className="navbar-brand text-white fw-bold" to="/">
             Buyer Talk
           </Link>
         </div>
@@ -157,14 +157,14 @@ export const BuyertalkNavbar = ({ toggleSidebar, isSidebarOpen }) => {
         {/* Desktop Menu */}
         <ul className="navbar-nav d-none d-lg-flex align-items-center">
           <li className="nav-item">
-            <Link className="nav-link text-white" to="/user/userDashBoard">
+            <Link className="nav-link text-white" to="/business/businessprofile">
               Home
             </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link text-white" href="#">
+            <Link className="nav-link text-white" to="/contactus">
               Contact
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
             <button onClick={handleLogout} className="btn btn-danger ms-2">
@@ -204,14 +204,14 @@ export const BuyertalkNavbar = ({ toggleSidebar, isSidebarOpen }) => {
             }}
           >
             <li>
-              <Link className="dropdown-item text-white" to="/user/userDashBoard">
+              <Link className="dropdown-item text-white" to="/business/businessprofile">
                 Home
               </Link>
             </li>
             <li>
-              <a className="dropdown-item text-white" href="#">
+              <Link className="dropdown-item text-white" to="/contactus">
                 Contact
-              </a>
+              </Link>
             </li>
             <li>
               <button

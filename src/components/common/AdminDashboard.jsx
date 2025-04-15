@@ -210,7 +210,6 @@
 //   );
 // };
 
-
 // import React, { useEffect, useState } from "react";
 // import Card from "react-bootstrap/Card";
 // import Table from "react-bootstrap/Table";
@@ -307,7 +306,6 @@
 //       console.error("Error fetching admin dashboard data:", err);
 //     }
 //   };
-  
 
 //   return (
 //     <div className={`p-4 min-vh-100 ${darkMode ? "bg-dark text-white" : "bg-light text-dark"}`}>
@@ -464,7 +462,6 @@
 //                     </tr>
 //                     )
 // })}
-                  
 
 //                 </tbody>
 //               </Table>
@@ -702,70 +699,572 @@
 // };
 
 
+
+
+// import React, { useEffect, useState } from "react";
+// import Card from "react-bootstrap/Card";
+// import Badge from "react-bootstrap/Badge";
+// import Table from "react-bootstrap/Table";
+// import Button from "react-bootstrap/Button";
+// import "../../assets/admin.css"
+// import {
+//   BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip,
+//   LineChart, Line, ResponsiveContainer, Legend,
+//   CartesianGrid
+// } from "recharts";
+// import axios from "axios";
+// import {
+//   FaBoxOpen, FaStar, FaExclamationCircle, FaUser,
+//   FaStore, FaUserPlus, FaMoon, FaSun
+// } from "react-icons/fa";
+
+// const COLORS = ["#00C49F", "#FFBB28", "#FF8042", "#8884d8", "#0088FE"];
+
+// export const AdminDashboard = () => {
+//   const [stats, setStats] = useState({});
+//   const [ratingsData, setRatingsData] = useState([]);
+//   const [ratingDistribution, setRatingDistribution] = useState([]);
+//   const [recentComplaints, setRecentComplaints] = useState([]);
+//   const [complaintStatusData, setComplaintStatusData] = useState([]);
+//   const [userGrowthData, setUserGrowthData] = useState([]);
+//   const [darkMode, setDarkMode] = useState(false);
+//   const [weeklyComplaintsData, setWeeklyComplaintsData] = useState([]);
+//   const [productCountByBusiness, setProductCountByBusiness] = useState([]);
+//   const [averageRatingPerProduct, setAverageRatingPerProduct] = useState([]);
+//   const [complaintResolutionTimeData, setComplaintResolutionTimeData] = useState([]);
+//   const [newUsersData, setNewUsersData] = useState([]);
+//   const [userData, setUserData] = useState({ activeUsers: 0, inactiveUsers: 0 });
+
+//   const fetchActiveInactiveData = async () => {
+//     try {
+//       const response = await axios.get('/admin/active-inactive-users');
+//       setUserData(response.data);
+//     } catch (error) {
+//       console.error('Error fetching user data:', error);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchDashboardData();
+//     fetchActiveInactiveData();
+//   }, []);
+
+//   const fetchDashboardData = async () => {
+//     try {
+//       const [productRes, ratingRes, complaintRes, userRes, businessRes,Res, newUsersRes] = await Promise.all([
+//         axios.get("/product/product"),
+//         axios.get("/rating/ratings"),
+//         axios.get("/complaint/complaints"),
+//         axios.get("/users"),
+//         axios.get("/business/businesses"),
+//         axios.get("/admin/stats"),
+//         axios.get("/admin/new-users-month"),
+
+//       ]);
+//       console.log(Res.data)
+
+//       const products = productRes.data.data || [];
+//       const ratings = ratingRes.data.data || [];
+//       const complaints = complaintRes.data.data || [];
+//       const users = userRes.data.data || [];
+//       const businesses = businessRes.data.data || [];
+//       const stats1 = Res.data || [];
+//       console.log(stats1)
+
+//       const reviewMap = {};
+//       const ratingMap = {};
+//       const distribution = [0, 0, 0, 0, 0];
+//       const statusMap = { Open: 0, Resolved: 0, Escalated: 0 };
+//       const userCountByMonth = {};
+//       const weeklyMap = {};
+//       const businessProductMap = {};
+//       const resolutionTimeList = [];
+
+//       const now = new Date();
+
+//       ratings.forEach((r) => {
+//         const product = r.productId?.name || "Unknown";
+//         reviewMap[product] = (reviewMap[product] || 0) + 1;
+//         ratingMap[product] = ratingMap[product] || [];
+//         ratingMap[product].push(r.rating);
+//         distribution[r.rating - 1] += 1;
+//       });
+
+//       complaints.forEach((c) => {
+//         if (statusMap[c.status] !== undefined) statusMap[c.status] += 1;
+
+//         const filed = new Date(c.fileddate);
+//         const week = `${filed.getFullYear()}-W${Math.ceil(
+//           ((filed - new Date(filed.getFullYear(), 0, 1)) / 86400000 + filed.getDay() + 1) / 7
+//         )}`;
+//         weeklyMap[week] = (weeklyMap[week] || 0) + 1;
+//         if (c.status === "Resolved") {
+//           const resolved = new Date(c.updatedAt); // use updatedAt as resolution time
+//           const diff = Math.round((resolved - filed) / (1000 * 60 * 60 * 24)); // difference in days
+//           resolutionTimeList.push({ name: c.productId?.name || "N/A", days: diff });
+//         }
+
+//       });
+
+//       const monthNames = {
+//         Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
+//         Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11
+//       };
+
+//       const activeInactiveChart = {
+//         title: "Active vs Inactive Users",
+//         subtitle: "Comparison of active users and inactive users",
+//         content: (
+//           <ResponsiveContainer width="100%" height={300}>
+//             <BarChart data={[{ name: 'Active Users', count: stats.activeUsers }, { name: 'Inactive Users', count: stats.inactiveUsers }]}>
+//               <CartesianGrid strokeDasharray="3 3" />
+//               <XAxis dataKey="name" />
+//               <YAxis />
+//               <Tooltip />
+//               <Legend />
+//               <Bar dataKey="count" fill="#82ca9d" />
+//             </BarChart>
+//           </ResponsiveContainer>
+//         ),
+//       }
+
+//       const rawMonthlyUsers = {};
+//       users.forEach((u) => {
+//         const date = new Date(u.createdAt);
+//         const year = date.getFullYear();
+//         const month = date.getMonth(); // 0-based
+//         const key = `${year}-${month}`; // e.g. 2025-3 for April
+//         rawMonthlyUsers[key] = (rawMonthlyUsers[key] || 0) + 1;
+//       });
+
+//       products.forEach((p) => {
+//         const businessName = p.businessId?.businessname || "Unknown";
+//         businessProductMap[businessName] = (businessProductMap[businessName] || 0) + 1;
+//       });
+
+//       const fetchActiveInactiveData = async () => {
+//         try {
+//           const response = await axios.get('/admin/active-inactive-users');
+//           setUserData(response.data);
+//         } catch (error) {
+//           console.error('Error fetching user data:', error);
+//         }
+//       };
+
+//       const averageRatings = Object.entries(ratingMap).map(([name, ratings]) => {
+//         const total = ratings.reduce((sum, r) => sum + r, 0);
+//         return { name, avg: +(total / ratings.length).toFixed(2) };
+//       });
+
+//       const sortedUserGrowthData = Object.entries(rawMonthlyUsers)
+//   .map(([key, count]) => {
+//     const [year, month] = key.split("-").map(Number);
+//     return {
+//       name: `${monthNames[month]} ${year}`, // formatted name
+//       count,
+//       date: new Date(year, month)
+//     };
+//   })
+//   .sort((a, b) => a.date - b.date)
+//   .map(({ name, count }) => ({ name, count }));
+
+//       setUserGrowthData(sortedUserGrowthData);
+
+//       const recentFiveComplaints = complaints
+//         .sort((a, b) => new Date(b.fileddate) - new Date(a.fileddate))
+//         .slice(0, 5);
+
+//       setStats({
+//         totalProducts: products.length,
+//         totalRatings: ratings.length,
+//         totalComplaints: complaints.length,
+//         totalUsers: users.length,
+//         totalBusinesses: businesses.length,
+//         newUsersThisMonth: newUsersRes.data.newUsersThisMonth || 0,
+//       });
+
+//       setRatingsData(Object.entries(reviewMap).map(([name, count]) => ({ name, count })));
+//       setRatingDistribution(distribution.map((value, index) => ({ name: `${index + 1}★`, value })));
+//       setComplaintStatusData(Object.entries(statusMap).map(([name, value]) => ({ name, value })));
+
+//       setUserGrowthData(Object.entries(userCountByMonth).map(([name, count]) => ({ name, count })));
+//       setWeeklyComplaintsData(Object.entries(weeklyMap).map(([name, count]) => ({ name, count })));
+//       setProductCountByBusiness(Object.entries(businessProductMap).map(([name, count]) => ({ name, count })));
+//       setAverageRatingPerProduct(averageRatings);
+//       setComplaintResolutionTimeData(resolutionTimeList);
+//       setRecentComplaints(recentFiveComplaints);
+//     } catch (err) {
+//       console.error("Dashboard fetch error:", err);
+//     }
+//   };
+
+//   const cardColors = ["#ffadad", "#ffd6a5", "#fdffb6", "#caffbf", "#9bf6ff", "#a0c4ff"];
+
+//   const statCards = [
+//     { icon: <FaBoxOpen size={28} color="#6f42c1" />, label: "Total Products", value: stats.totalProducts },
+//     { icon: <FaStar size={28} color="#ffc107" />, label: "Total Ratings", value: stats.totalRatings },
+//     { icon: <FaExclamationCircle size={28} color="#dc3545" />, label: "Total Complaints", value: stats.totalComplaints },
+//     { icon: <FaUser size={28} color="#17a2b8" />, label: "Total Users", value: stats.totalUsers },
+//     { icon: <FaStore size={28} color="#28a745" />, label: "Total Businesses", value: stats.totalBusinesses },
+//     { icon: <FaUserPlus size={28} color="#007bff" />, label: "New Users (This Month)", value: stats.newUsersThisMonth }
+//   ];
+
+//   const additionalCharts = [
+//     {
+//       title: "Weekly Complaints Trend",
+//       subtitle: "Complaints submitted each week",
+//       content: (
+//         // <LineChart
+//         //   width={500}
+//         //   height={300}
+//         //   data={weeklyComplaintsData}  // use your actual data here
+//         //   margin={{ top: 20, right: 30, left: 30, bottom: 30 }}
+//         // >
+//         //   <XAxis
+//         //     dataKey="week"
+//         //     interval={0}
+//         //     tick={{ fontSize: 12 }}
+//         //     angle={-15}
+//         //     textAnchor="end"
+//         //   />
+//         //   <YAxis />
+//         //   <Tooltip />
+//         //   <Legend />
+//         //   <Line
+//         //     type="monotone"
+//         //     dataKey="count"
+//         //     stroke="#FF8042"
+//         //     strokeWidth={2}
+//         //     dot={true}
+//         //   />
+//         // </LineChart>
+//         <LineChart
+//   width={500}
+//   height={300}
+//   data={weeklyComplaintsData}
+//   margin={{ top: 20, right: 30, left: 30, bottom: 30 }}
+// >
+//   <CartesianGrid stroke={darkMode ? "#444" : "#ccc"} />
+//   <XAxis
+//     dataKey="week"
+//     interval={0}
+//     tick={{ fontSize: 12, fill: darkMode ? "#fff" : "#000" }}
+//     angle={-15}
+//     textAnchor="end"
+//     stroke={darkMode ? "#aaa" : "#000"}
+//   />
+//   <YAxis
+//     tick={{ fill: darkMode ? "#fff" : "#000" }}
+//     stroke={darkMode ? "#aaa" : "#000"}
+//   />
+//   <Tooltip
+//     contentStyle={{
+//       backgroundColor: darkMode ? "#333" : "#fff",
+//       color: darkMode ? "#fff" : "#000"
+//     }}
+//     labelStyle={{ color: darkMode ? "#ccc" : "#000" }}
+//     itemStyle={{ color: darkMode ? "#fff" : "#000" }}
+//   />
+//   <Legend wrapperStyle={{ color: darkMode ? "#fff" : "#000" }} />
+//   <Line
+//     type="monotone"
+//     dataKey="count"
+//     stroke="#FF8042"
+//     strokeWidth={2}
+//     dot={true}
+//   />
+// </LineChart>
+
+//       )
+//     },
+//     {
+//       title: "Product Count by Business",
+//       subtitle: "Number of products listed by each business",
+//       content: (
+//         <BarChart
+//           layout="vertical"
+//           width={500}
+//           height={300}
+//           data={productCountByBusiness}  // use the correct variable here
+//           margin={{ top: 20, right: 30, left: 100, bottom: 20 }}
+//         >
+//           <XAxis type="number" />
+//           <YAxis
+//             type="category"
+//             dataKey="name"
+//             interval={0}
+//             tick={{ fontSize: 12 }}
+//             tickFormatter={(value) =>
+//               value.length > 14 ? `${value.slice(0, 14)}...` : value
+//             }
+//           />
+//           <Tooltip />
+//           <Legend />
+//           <Bar dataKey="count" fill="#8884d8" />
+//         </BarChart>
+//       )
+//     }
+//     ,
+//     {
+//       title: "Average Rating per Product",
+//       subtitle: "Product performance by user rating",
+//       content: (
+//         <BarChart data={averageRatingPerProduct} layout="vertical">
+//           <XAxis type="number" domain={[0, 5]} />
+//           <YAxis dataKey="name" type="category" />
+//           <Tooltip />
+//           <Legend />
+//           <Bar dataKey="avg" fill="#00C49F" />
+//         </BarChart>
+//       )
+//     },
+//     {title: "Active vs Inactive Users",
+//       subtitle: "Comparison of active users and inactive users",
+//       content: (
+//         <ResponsiveContainer width="100%" height={300}>
+//           <BarChart data={[{ name: 'Active Users', count: userData.activeUsers }, { name: 'Inactive Users', count: userData.inactiveUsers }]}>
+//             <CartesianGrid strokeDasharray="3 3" />
+//             <XAxis dataKey="name" />
+//             <YAxis />
+//             <Tooltip />
+//             <Legend />
+//             <Bar dataKey="count" fill="#82ca9d" />
+//           </BarChart>
+//         </ResponsiveContainer>
+//       ),}
+
+//   ];
+
+//   const chartData = [
+//     {
+//       title: "Review Count per Product",
+//       subtitle: "Total number of reviews per product",
+//       content: (
+//         <BarChart data={ratingsData} margin={{ top: 20, right: 30, left: 20, bottom: 80 }}>
+//           <XAxis dataKey="name" angle={-45} textAnchor="end" interval={0} />
+//           <YAxis label={{ value: "Review Count", angle: -90, position: "insideLeft" }} />
+//           <Tooltip />
+//           <Legend />
+//           <Bar dataKey="count" fill="#8884d8" />
+//         </BarChart>
+//       )
+//     },
+//     {
+//       title: "Rating Distribution",
+//       subtitle: "Number of ratings by star count",
+//       content: (
+//         <PieChart>
+//           <Pie data={ratingDistribution} cx="50%" cy="50%" outerRadius={100} label dataKey="value">
+//             {ratingDistribution.map((entry, index) => (
+//               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+//             ))}
+//           </Pie>
+//           <Tooltip />
+//           <Legend />
+//         </PieChart>
+//       )
+//     },
+//     {
+//       title: "Complaint Status Overview",
+//       subtitle: "Complaints by current status",
+//       content: (
+//         <PieChart>
+//           <Pie data={complaintStatusData} cx="50%" cy="50%" outerRadius={100} label dataKey="value">
+//             {complaintStatusData.map((entry, index) => (
+//               <Cell key={`status-${index}`} fill={COLORS[index % COLORS.length]} />
+//             ))}
+//           </Pie>
+//           <Tooltip />
+//           <Legend />
+//         </PieChart>
+//       )
+//     },
+//     {
+//       title: "Complaint Resolution Time",
+//       subtitle: "Days taken to resolve complaints",
+//       content: (
+//         <BarChart data={complaintResolutionTimeData} layout="vertical">
+//           <XAxis type="number" />
+//           <YAxis dataKey="name" type="category" />
+//           <Tooltip />
+//           <Legend />
+//           <Bar dataKey="days" fill="#FFBB28" />
+//         </BarChart>
+//       )
+//     },
+
+//   ];
+
+//   const getStatusBadge = (status) => {
+//     switch (status.toLowerCase()) {
+//       case 'open':
+//         return <Badge bg="warning" text="dark">Open</Badge>;
+//       case 'escalated':
+//         return <Badge bg="danger">Escalated</Badge>;
+//       case 'resolved':
+//         return <Badge bg="success">Resolved</Badge>;
+//       default:
+//         return <Badge bg="secondary">{status}</Badge>;
+//     }
+//   };
+
+//   return (
+//     <div className={`p-4 min-vh-100 ${darkMode ? "bg-dark text-white" : "bg-light text-dark"}`}>
+//       <div className="d-flex justify-content-between align-items-center mb-4">
+//         <h2>Admin Dashboard</h2>
+//         <Button variant={darkMode ? "light" : "dark"} onClick={() => setDarkMode(!darkMode)}>
+//           {darkMode ? <FaSun /> : <FaMoon />} {darkMode ? "Light Mode" : "Dark Mode"}
+//         </Button>
+//       </div>
+
+//       <div className="row g-3 mb-5 text-center">
+//   {statCards.map(({ icon, label, value }, idx) => (
+//     <div className="col-6 col-md-4 col-lg-2" key={idx}>
+//       <Card
+//         className="shadow h-100 dashboard-card-hover"
+//         style={{
+
+//           transition: "transform 0.2s ease-in-out",
+
+//         }}
+//       >
+//         <Card.Body className="d-flex flex-column justify-content-center align-items-center">
+//           {icon}
+//           <h6 className="mt-2">{label}</h6>
+//           <h4>{value}</h4>
+//         </Card.Body>
+//       </Card>
+//     </div>
+//   ))}
+// </div>
+
+//       <div className="row g-4 mb-5">
+//         {chartData.map((chart, i) => (
+//           <div className="col-md-6" key={i}>
+//             <Card className="p-3 shadow h-100 dashboard-chart-card" style={{ transition: "transform 0.2s ease-in-out" }}>
+//               <h5>{chart.title}</h5>
+//               <p className="text-muted">{chart.subtitle}</p>
+//               <ResponsiveContainer width="100%" height={300}>
+//                 {chart.content}
+//               </ResponsiveContainer>
+//             </Card>
+//           </div>
+//         ))}
+//       </div>
+
+//       <div>
+//         <h5>Recent Complaints</h5>
+//         <p className="text-muted">Latest 5 complaints submitted</p>
+//         <Table striped bordered hover responsive variant={darkMode ? "dark" : "light"}>
+//           <thead className="table-dark">
+//             <tr>
+//               <th style={{ width: "10%" }}>Product</th>
+//               <th>User</th>
+//               <th style={{ width: "40%" }}>Description</th>
+//               <th>Status</th>
+//               <th>Filed Date</th>
+//             </tr>
+//           </thead>
+//           <tbody>
+//             {recentComplaints.map((c, i) => (
+//               <tr key={i}>
+//                 <td className="product-col">{c.productId?.name || "N/A"}</td>
+//                 <td>{c.userId ? `${c.userId.firstname} ${c.userId.lastname}` : "N/A"}</td>
+//                 <td className="description-col">{c.description}</td>
+//                 <td>{getStatusBadge(c.status)}</td>
+//                 <td>{new Date(c.fileddate).toLocaleDateString()}</td>
+//               </tr>
+//             ))}
+//           </tbody>
+//         </Table>
+//       </div>
+
+//       <div className="row g-4">
+//         {additionalCharts.map((chart, i) => (
+//           <div className="col-md-6" key={i}>
+//             <Card className="p-3 shadow h-100 dashboard-chart-card">
+//               <h5>{chart.title}</h5>
+//               <p className="text-muted">{chart.subtitle}</p>
+//               <ResponsiveContainer width="100%" height={300}>
+//                 {chart.content}
+//               </ResponsiveContainer>
+//             </Card>
+//           </div>
+//         ))}
+//       </div>
+
+//     </div>
+//   );
+// };
+
 import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import "../../assets/admin.css" 
+import "../../assets/admin.css";
 import {
-  BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip,
-  LineChart, Line, ResponsiveContainer, Legend,
-  CartesianGrid
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  Tooltip,
+  LineChart,
+  Line,
+  ResponsiveContainer,
+  Legend,
+  CartesianGrid,
 } from "recharts";
 import axios from "axios";
 import {
-  FaBoxOpen, FaStar, FaExclamationCircle, FaUser,
-  FaStore, FaUserPlus, FaMoon, FaSun
+  FaBoxOpen,
+  FaStar,
+  FaExclamationCircle,
+  FaUser,
+  FaStore,
+  FaUserPlus,
+  FaMoon,
+  FaSun,
 } from "react-icons/fa";
+import { BusinessRegistrationChart, ProductCountByBusinessChart, RatingDistributionChart, UserRegistrationChart } from "./AdminDashboardCharts";
 
 const COLORS = ["#00C49F", "#FFBB28", "#FF8042", "#8884d8", "#0088FE"];
 
 export const AdminDashboard = () => {
   const [stats, setStats] = useState({});
-  const [ratingsData, setRatingsData] = useState([]);
-  const [ratingDistribution, setRatingDistribution] = useState([]);
-  const [recentComplaints, setRecentComplaints] = useState([]);
-  const [complaintStatusData, setComplaintStatusData] = useState([]);
-  const [userGrowthData, setUserGrowthData] = useState([]);
   const [darkMode, setDarkMode] = useState(false);
-  const [weeklyComplaintsData, setWeeklyComplaintsData] = useState([]);
-  const [productCountByBusiness, setProductCountByBusiness] = useState([]);
-  const [averageRatingPerProduct, setAverageRatingPerProduct] = useState([]);
-  const [complaintResolutionTimeData, setComplaintResolutionTimeData] = useState([]);
-  const [newUsersData, setNewUsersData] = useState([]);
-  const [userData, setUserData] = useState({ activeUsers: 0, inactiveUsers: 0 });
-
-  const fetchActiveInactiveData = async () => {
-    try {
-      const response = await axios.get('/admin/active-inactive-users');
-      setUserData(response.data);
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  };
-
+  const [monthlyUsers, setMonthlyUsers] = useState([]);
 
   useEffect(() => {
     fetchDashboardData();
-    fetchActiveInactiveData();
+    // fetchActiveInactiveData();
   }, []);
-
-
 
   const fetchDashboardData = async () => {
     try {
-      const [productRes, ratingRes, complaintRes, userRes, businessRes,Res] = await Promise.all([
+      const [
+        productRes,
+        ratingRes,
+        complaintRes,
+        userRes,
+        businessRes,
+        Res,
+        newUsersRes,
+        monthlyUserRes,
+      ] = await Promise.all([
         axios.get("/product/product"),
         axios.get("/rating/ratings"),
         axios.get("/complaint/complaints"),
         axios.get("/users"),
         axios.get("/business/businesses"),
         axios.get("/admin/stats"),
-       
-
+        axios.get("/admin/new-users-month"),
+        axios.get("/admin/monthly-users"),
       ]);
-      console.log(Res.data)
+      console.log(Res.data);
 
       const products = productRes.data.data || [];
       const ratings = ratingRes.data.data || [];
@@ -773,120 +1272,14 @@ export const AdminDashboard = () => {
       const users = userRes.data.data || [];
       const businesses = businessRes.data.data || [];
       const stats1 = Res.data || [];
-      console.log(stats1)
+      const newUsersThisMonth = newUsersRes.data || 0; // Default to 0 if no data
 
-      const reviewMap = {};
-      const ratingMap = {};
-      const distribution = [0, 0, 0, 0, 0];
-      const statusMap = { Open: 0, Resolved: 0, Escalated: 0 };
-      const userCountByMonth = {};
-      const weeklyMap = {};
-      const businessProductMap = {};
-      const resolutionTimeList = [];
+      console.log(stats1);
 
-      const now = new Date();
-
-
-
-      ratings.forEach((r) => {
-        const product = r.productId?.name || "Unknown";
-        reviewMap[product] = (reviewMap[product] || 0) + 1;
-        ratingMap[product] = ratingMap[product] || [];
-        ratingMap[product].push(r.rating);
-        distribution[r.rating - 1] += 1;
-      });
-
-      complaints.forEach((c) => {
-        if (statusMap[c.status] !== undefined) statusMap[c.status] += 1;
-
-        const filed = new Date(c.fileddate);
-        const week = `${filed.getFullYear()}-W${Math.ceil(
-          ((filed - new Date(filed.getFullYear(), 0, 1)) / 86400000 + filed.getDay() + 1) / 7
-        )}`;
-        weeklyMap[week] = (weeklyMap[week] || 0) + 1;
-        if (c.status === "Resolved") {
-          const resolved = new Date(c.updatedAt); // use updatedAt as resolution time
-          const diff = Math.round((resolved - filed) / (1000 * 60 * 60 * 24)); // difference in days
-          resolutionTimeList.push({ name: c.productId?.name || "N/A", days: diff });
-        }
-        
-      });
-
-      const monthNames = {
-        Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
-        Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11
-      };
-
-      const activeInactiveChart = {
-        title: "Active vs Inactive Users",
-        subtitle: "Comparison of active users and inactive users",
-        content: (
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={[{ name: 'Active Users', count: stats.activeUsers }, { name: 'Inactive Users', count: stats.inactiveUsers }]}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="count" fill="#82ca9d" />
-            </BarChart>
-          </ResponsiveContainer>
-        ),
-      }
-
-
-      const rawMonthlyUsers = {};
-      users.forEach((u) => {
-        const date = new Date(u.createdAt);
-        const year = date.getFullYear();
-        const month = date.getMonth(); // 0-based
-        const key = `${year}-${month}`; // e.g. 2025-3 for April
-        rawMonthlyUsers[key] = (rawMonthlyUsers[key] || 0) + 1;
-      });
-
-      
-
-      products.forEach((p) => {
-        const businessName = p.businessId?.businessname || "Unknown";
-        businessProductMap[businessName] = (businessProductMap[businessName] || 0) + 1;
-      });
-
-      const fetchActiveInactiveData = async () => {
-        try {
-          const response = await axios.get('/admin/active-inactive-users');
-          setUserData(response.data);
-        } catch (error) {
-          console.error('Error fetching user data:', error);
-        }
-      };
-      
-      
-    
-
-      const averageRatings = Object.entries(ratingMap).map(([name, ratings]) => {
-        const total = ratings.reduce((sum, r) => sum + r, 0);
-        return { name, avg: +(total / ratings.length).toFixed(2) };
-      });
-
-      
-      const sortedUserGrowthData = Object.entries(rawMonthlyUsers)
-  .map(([key, count]) => {
-    const [year, month] = key.split("-").map(Number);
-    return {
-      name: `${monthNames[month]} ${year}`, // formatted name
-      count,
-      date: new Date(year, month)
-    };
-  })
-  .sort((a, b) => a.date - b.date)
-  .map(({ name, count }) => ({ name, count }));
-
-      
-      setUserGrowthData(sortedUserGrowthData);
-
-      const recentFiveComplaints = complaints
-        .sort((a, b) => new Date(b.fileddate) - new Date(a.fileddate))
-        .slice(0, 5);
+      // products.forEach((p) => {
+      //   const businessName = p.businessId?.businessname || "Unknown";
+      //   businessProductMap[businessName] = (businessProductMap[businessName] || 0) + 1;
+      // });
 
       setStats({
         totalProducts: products.length,
@@ -894,335 +1287,129 @@ export const AdminDashboard = () => {
         totalComplaints: complaints.length,
         totalUsers: users.length,
         totalBusinesses: businesses.length,
-        newUsersThisMonth: userCountByMonth[new Date().toLocaleString("default", { month: "short", year: "numeric" })] || 0,
+        newUsersThisMonth: newUsersRes.data.newUsersThisMonth || 0,
+        
       });
-
-      setRatingsData(Object.entries(reviewMap).map(([name, count]) => ({ name, count })));
-      setRatingDistribution(distribution.map((value, index) => ({ name: `${index + 1}★`, value })));
-      setComplaintStatusData(Object.entries(statusMap).map(([name, value]) => ({ name, value })));
-      
-      setUserGrowthData(Object.entries(userCountByMonth).map(([name, count]) => ({ name, count })));
-      setWeeklyComplaintsData(Object.entries(weeklyMap).map(([name, count]) => ({ name, count })));
-      setProductCountByBusiness(Object.entries(businessProductMap).map(([name, count]) => ({ name, count })));
-      setAverageRatingPerProduct(averageRatings);
-      setComplaintResolutionTimeData(resolutionTimeList);
-      setRecentComplaints(recentFiveComplaints);
+      setMonthlyUsers(monthlyUserRes.data.data);
     } catch (err) {
       console.error("Dashboard fetch error:", err);
     }
   };
 
-  const cardColors = ["#ffadad", "#ffd6a5", "#fdffb6", "#caffbf", "#9bf6ff", "#a0c4ff"];
+  const cardColors = [
+    "#ffadad",
+    "#ffd6a5",
+    "#fdffb6",
+    "#caffbf",
+    "#9bf6ff",
+    "#a0c4ff",
+  ];
 
   const statCards = [
-    { icon: <FaBoxOpen size={28} color="#6f42c1" />, label: "Total Products", value: stats.totalProducts },
-    { icon: <FaStar size={28} color="#ffc107" />, label: "Total Ratings", value: stats.totalRatings },
-    { icon: <FaExclamationCircle size={28} color="#dc3545" />, label: "Total Complaints", value: stats.totalComplaints },
-    { icon: <FaUser size={28} color="#17a2b8" />, label: "Total Users", value: stats.totalUsers },
-    { icon: <FaStore size={28} color="#28a745" />, label: "Total Businesses", value: stats.totalBusinesses },
-    { icon: <FaUserPlus size={28} color="#007bff" />, label: "New Users (This Month)", value: stats.newUsersThisMonth }
+    {
+      icon: <FaBoxOpen size={28} color="#6f42c1" />,
+      label: "Total Products",
+      value: stats.totalProducts,
+    },
+    {
+      icon: <FaStar size={28} color="#ffc107" />,
+      label: "Total Ratings",
+      value: stats.totalRatings,
+    },
+    {
+      icon: <FaExclamationCircle size={28} color="#dc3545" />,
+      label: "Total Complaints",
+      value: stats.totalComplaints,
+    },
+    {
+      icon: <FaUser size={28} color="#17a2b8" />,
+      label: "Total Users",
+      value: stats.totalUsers,
+    },
+    {
+      icon: <FaStore size={28} color="#28a745" />,
+      label: "Total Businesses",
+      value: stats.totalBusinesses,
+    },
+    {
+      icon: <FaUserPlus size={28} color="#007bff" />,
+      label: "New Users (This Month)",
+      value: stats.newUsersThisMonth,
+    },
   ];
 
-  const additionalCharts = [
-    {
-      title: "Weekly Complaints Trend",
-      subtitle: "Complaints submitted each week",
-      content: (
-        // <LineChart
-        //   width={500}
-        //   height={300}
-        //   data={weeklyComplaintsData}  // use your actual data here
-        //   margin={{ top: 20, right: 30, left: 30, bottom: 30 }}
-        // >
-        //   <XAxis
-        //     dataKey="week"
-        //     interval={0}
-        //     tick={{ fontSize: 12 }}
-        //     angle={-15}
-        //     textAnchor="end"
-        //   />
-        //   <YAxis />
-        //   <Tooltip />
-        //   <Legend />
-        //   <Line
-        //     type="monotone"
-        //     dataKey="count"
-        //     stroke="#FF8042"
-        //     strokeWidth={2}
-        //     dot={true}
-        //   />
-        // </LineChart>
-        <LineChart
-  width={500}
-  height={300}
-  data={weeklyComplaintsData}
-  margin={{ top: 20, right: 30, left: 30, bottom: 30 }}
->
-  <CartesianGrid stroke={darkMode ? "#444" : "#ccc"} />
-  <XAxis
-    dataKey="week"
-    interval={0}
-    tick={{ fontSize: 12, fill: darkMode ? "#fff" : "#000" }}
-    angle={-15}
-    textAnchor="end"
-    stroke={darkMode ? "#aaa" : "#000"}
-  />
-  <YAxis
-    tick={{ fill: darkMode ? "#fff" : "#000" }}
-    stroke={darkMode ? "#aaa" : "#000"}
-  />
-  <Tooltip
-    contentStyle={{
-      backgroundColor: darkMode ? "#333" : "#fff",
-      color: darkMode ? "#fff" : "#000"
-    }}
-    labelStyle={{ color: darkMode ? "#ccc" : "#000" }}
-    itemStyle={{ color: darkMode ? "#fff" : "#000" }}
-  />
-  <Legend wrapperStyle={{ color: darkMode ? "#fff" : "#000" }} />
-  <Line
-    type="monotone"
-    dataKey="count"
-    stroke="#FF8042"
-    strokeWidth={2}
-    dot={true}
-  />
-</LineChart>
-
-      )
-    },
-    {
-      title: "Product Count by Business",
-      subtitle: "Number of products listed by each business",
-      content: (
-        <BarChart
-          layout="vertical"
-          width={500}
-          height={300}
-          data={productCountByBusiness}  // use the correct variable here
-          margin={{ top: 20, right: 30, left: 100, bottom: 20 }}
-        >
-          <XAxis type="number" />
-          <YAxis
-            type="category"
-            dataKey="name"
-            interval={0}
-            tick={{ fontSize: 12 }}
-            tickFormatter={(value) =>
-              value.length > 14 ? `${value.slice(0, 14)}...` : value
-            }
-          />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="count" fill="#8884d8" />
-        </BarChart>
-      )
-    }
-    ,
-    {
-      title: "Average Rating per Product",
-      subtitle: "Product performance by user rating",
-      content: (
-        <BarChart data={averageRatingPerProduct} layout="vertical">
-          <XAxis type="number" domain={[0, 5]} />
-          <YAxis dataKey="name" type="category" />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="avg" fill="#00C49F" />
-        </BarChart>
-      )
-    },
-    {title: "Active vs Inactive Users",
-      subtitle: "Comparison of active users and inactive users",
-      content: (
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={[{ name: 'Active Users', count: userData.activeUsers }, { name: 'Inactive Users', count: userData.inactiveUsers }]}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="count" fill="#82ca9d" />
-          </BarChart>
-        </ResponsiveContainer>
-      ),}
-    
-   
-  ];
-
- 
 
 
-
-
-  const chartData = [
-    {
-      title: "Review Count per Product",
-      subtitle: "Total number of reviews per product",
-      content: (
-        <BarChart data={ratingsData} margin={{ top: 20, right: 30, left: 20, bottom: 80 }}>
-          <XAxis dataKey="name" angle={-45} textAnchor="end" interval={0} />
-          <YAxis label={{ value: "Review Count", angle: -90, position: "insideLeft" }} />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="count" fill="#8884d8" />
-        </BarChart>
-      )
-    },
-    {
-      title: "Rating Distribution",
-      subtitle: "Number of ratings by star count",
-      content: (
-        <PieChart>
-          <Pie data={ratingDistribution} cx="50%" cy="50%" outerRadius={100} label dataKey="value">
-            {ratingDistribution.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-          <Tooltip />
-          <Legend />
-        </PieChart>
-      )
-    },
-    {
-      title: "Complaint Status Overview",
-      subtitle: "Complaints by current status",
-      content: (
-        <PieChart>
-          <Pie data={complaintStatusData} cx="50%" cy="50%" outerRadius={100} label dataKey="value">
-            {complaintStatusData.map((entry, index) => (
-              <Cell key={`status-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-          <Tooltip />
-          <Legend />
-        </PieChart>
-      )
-    },
-    {
-      title: "Complaint Resolution Time",
-      subtitle: "Days taken to resolve complaints",
-      content: (
-        <BarChart data={complaintResolutionTimeData} layout="vertical">
-          <XAxis type="number" />
-          <YAxis dataKey="name" type="category" />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="days" fill="#FFBB28" />
-        </BarChart>
-      )
-    },
-   
-  ];
 
   const getStatusBadge = (status) => {
     switch (status.toLowerCase()) {
-      case 'open':
-        return <Badge bg="warning" text="dark">Open</Badge>;
-      case 'escalated':
+      case "open":
+        return (
+          <Badge bg="warning" text="dark">
+            Open
+          </Badge>
+        );
+      case "escalated":
         return <Badge bg="danger">Escalated</Badge>;
-      case 'resolved':
+      case "resolved":
         return <Badge bg="success">Resolved</Badge>;
       default:
         return <Badge bg="secondary">{status}</Badge>;
     }
   };
 
-  
-
-  
-  
-
-
   return (
-    <div className={`p-4 min-vh-100 ${darkMode ? "bg-dark text-white" : "bg-light text-dark"}`}>
+    <div
+      className={`p-4 min-vh-100 ${
+        darkMode ? "bg-dark text-white" : "bg-light text-dark"
+      }`}
+    >
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2>Admin Dashboard</h2>
-        <Button variant={darkMode ? "light" : "dark"} onClick={() => setDarkMode(!darkMode)}>
-          {darkMode ? <FaSun /> : <FaMoon />} {darkMode ? "Light Mode" : "Dark Mode"}
+        <Button
+          variant={darkMode ? "light" : "dark"}
+          onClick={() => setDarkMode(!darkMode)}
+        >
+          {darkMode ? <FaSun /> : <FaMoon />}{" "}
+          {darkMode ? "Light Mode" : "Dark Mode"}
         </Button>
       </div>
 
       <div className="row g-3 mb-5 text-center">
-  {statCards.map(({ icon, label, value }, idx) => (
-    <div className="col-6 col-md-4 col-lg-2" key={idx}>
-      <Card
-        className="shadow h-100 dashboard-card-hover"
-        style={{
-         
-          transition: "transform 0.2s ease-in-out",
-          
-        }}
-      >
-        <Card.Body className="d-flex flex-column justify-content-center align-items-center">
-          {icon}
-          <h6 className="mt-2">{label}</h6> 
-          <h4>{value}</h4>
-        </Card.Body>
-      </Card>
-    </div>
-  ))}
-</div>
-
-
-      <div className="row g-4 mb-5">
-        {chartData.map((chart, i) => (
-          <div className="col-md-6" key={i}>
-            <Card className="p-3 shadow h-100 dashboard-chart-card" style={{ transition: "transform 0.2s ease-in-out" }}>
-              <h5>{chart.title}</h5>
-              <p className="text-muted">{chart.subtitle}</p>
-              <ResponsiveContainer width="100%" height={300}>
-                {chart.content}
-              </ResponsiveContainer>
+        {statCards.map(({ icon, label, value }, idx) => (
+          <div className="col-6 col-md-4 col-lg-2" key={idx}>
+            <Card
+              className="shadow h-100 dashboard-card-hover"
+              style={{
+                transition: "transform 0.2s ease-in-out",
+              }}
+            >
+              <Card.Body className="d-flex flex-column justify-content-center align-items-center">
+                {icon}
+                <h6 className="mt-2">{label}</h6>
+                <h4>{value}</h4>
+              </Card.Body>
             </Card>
           </div>
         ))}
       </div>
-
-      <div>
-        <h5>Recent Complaints</h5>
-        <p className="text-muted">Latest 5 complaints submitted</p>
-        <Table striped bordered hover responsive variant={darkMode ? "dark" : "light"}>
-          <thead className="table-dark">
-            <tr>
-              <th style={{ width: "10%" }}>Product</th>
-              <th>User</th>
-              <th style={{ width: "40%" }}>Description</th>
-              <th>Status</th>
-              <th>Filed Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {recentComplaints.map((c, i) => (
-              <tr key={i}>
-                <td className="product-col">{c.productId?.name || "N/A"}</td>
-                <td>{c.userId ? `${c.userId.firstname} ${c.userId.lastname}` : "N/A"}</td>
-                <td className="description-col">{c.description}</td>
-                <td>{getStatusBadge(c.status)}</td>
-                <td>{new Date(c.fileddate).toLocaleDateString()}</td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      </div>
-
-      <div className="row g-4">
-        {additionalCharts.map((chart, i) => (
-          <div className="col-md-6" key={i}>
-            <Card className="p-3 shadow h-100 dashboard-chart-card">
-              <h5>{chart.title}</h5>
-              <p className="text-muted">{chart.subtitle}</p>
-              <ResponsiveContainer width="100%" height={300}>
-                {chart.content}
-              </ResponsiveContainer>
-            </Card>
-          </div>
-        ))}
-      </div>
-
       
+     
+      <div className="row g-3 mb-5">
+        <div className="col-md-6">
+          <UserRegistrationChart />
+        </div>
+        <div className="col-md-6">
+          <ProductCountByBusinessChart />
+        </div>
+        <div className="col-md-6">
+          <RatingDistributionChart />
+        </div>
+        <div className="col-md-6">
+          <BusinessRegistrationChart />
+        </div>
+      </div>
     </div>
+    
   );
 };
-
-

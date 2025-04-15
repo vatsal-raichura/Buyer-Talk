@@ -49,7 +49,7 @@ export const AdminNavbar = ({ toggleSidebar, isSidebarOpen }) => {
               />
             </button>
           )}
-          <Link className="navbar-brand text-white fw-bold" to="/user/userDashBoard">
+          <Link className="navbar-brand text-white fw-bold" to="/">
             Buyer Talk
           </Link>
         </div>
@@ -57,7 +57,7 @@ export const AdminNavbar = ({ toggleSidebar, isSidebarOpen }) => {
         {/* Desktop Menu */}
         <ul className="navbar-nav d-none d-lg-flex align-items-center">
           <li className="nav-item">
-            <Link className="nav-link text-white" to="/user/userDashBoard">
+            <Link className="nav-link text-white" to="/admin/adminDashboard">
               Home
             </Link>
           </li>
