@@ -1229,7 +1229,7 @@ import {
   FaMoon,
   FaSun,
 } from "react-icons/fa";
-import { BusinessRegistrationChart, ProductCountByBusinessChart, RatingDistributionChart, UserRegistrationChart } from "./AdminDashboardCharts";
+import { BusinessRegistrationChart, ComplaintStatusChart, ProductCategoryChart, ProductCountByBusinessChart, RatingDistributionChart, UserActivityChart, UserRegistrationChart, WeeklyComplaintsChart, } from "./AdminDashboardCharts";
 
 const COLORS = ["#00C49F", "#FFBB28", "#FF8042", "#8884d8", "#0088FE"];
 
@@ -1408,6 +1408,19 @@ export const AdminDashboard = () => {
         <div className="col-md-6">
           <BusinessRegistrationChart />
         </div>
+        <div className="col-md-6">
+          <WeeklyComplaintsChart />
+        </div>
+        <div className="col-md-6">
+          <ComplaintStatusChart />
+        </div>
+        <div className="col-md-6">
+          <UserActivityChart />
+        </div>
+        <div className="col-md-6">
+          <ProductCategoryChart />
+        </div>
+        
       </div>
     </div>
     
