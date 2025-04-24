@@ -32,7 +32,7 @@ export const SelectLoginRole = () => {
     <div>
       <ToastContainer position="top-left" autoClose={3000} theme="dark" transition={Bounce} />
       {isLoading && <CustomLoader />}
-      <Container fluid className="d-flex align-items-center justify-content-center min-vh-100" style={{ backgroundImage: "url(https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp)", backgroundSize: "cover" }}>
+      <Container fluid className="d-flex align-items-center justify-content-center min-vh-100" style={{ backgroundImage: "url(src/assets/images/modern-productivity-concept-with-flat-design_23-2147966172.jpg)", backgroundSize:"cover" }}>
         <Card className="m-3 p-4 shadow-lg" style={{ maxWidth: "500px", width: "100%" }}>
           <Card.Body className="px-4">
             <h2 className="text-uppercase text-center mb-4">Select Login Role</h2>

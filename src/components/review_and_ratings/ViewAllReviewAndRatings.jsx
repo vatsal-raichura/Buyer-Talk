@@ -319,7 +319,7 @@ export const ViewAllReviewAndRatings = () => {
   
 
   return (
-    <div className="table-container" style={{ textAlign: "center" }}>
+    <div className="table-container " style={{ textAlign: "center" }}>
       {isLoading && <CustomLoader />}
       <br />
       <h2> Review and Ratings</h2>
@@ -330,8 +330,7 @@ export const ViewAllReviewAndRatings = () => {
             <th>Rating</th>
             <th>Review Date</th>
             <th>Product Name</th>
-            <th>Product Brand</th>
-            <th>Product Price</th>
+            
             <th>Product Image</th>
           </tr>
         </thead>
@@ -347,12 +346,11 @@ export const ViewAllReviewAndRatings = () => {
   </span>{" "}
   ({rt.rating})
 </td>
-              <td>{new Date(rt.review_date).toLocaleDateString()}</td>
+              <td className="fs-5">{new Date(rt.review_date).toLocaleDateString()}</td>
 
               {/* Check if product details exist */}
-              <td>{rt.productId?.name || "N/A"}</td>
-              <td>{rt.productId?.brand || "N/A"}</td>
-              <td>{rt.productId?.price ? `₹${rt.productId.price}` : "N/A"}</td>
+              <td className="fs-5">{rt.productId?.name || "N/A"}</td>
+              
               <td>
                 {rt.productId?.productURL ? (
                   <Link to={`/user/productdetails/${rt.productId._id}`}>
@@ -370,6 +368,36 @@ export const ViewAllReviewAndRatings = () => {
           ))}
         </tbody>
       </table>
+
+      {/* Card view for mobile */}
+      <div className="mobile-card-container">
+        {ratings.map((rt) => (
+          <div className="mobile-card" key={rt._id}>
+            <p><strong>Review:</strong> {rt.comment}</p>
+            <p>
+              <strong>Rating:</strong>{" "}
+              <span style={{ color: getStarColor(rt.rating) }}>
+                {renderStars(rt.rating)} ({rt.rating})
+              </span>
+            </p>
+            <p><strong>Review Date:</strong> {new Date(rt.review_date).toLocaleDateString()}</p>
+            <p><strong>Product:</strong> {rt.productId?.name || "N/A"}</p>
+            <div className="product-img-wrapper">
+              {rt.productId?.productURL ? (
+                <Link to={`/user/productdetails/${rt.productId._id}`}>
+                  <img
+                    src={rt.productId.productURL}
+                    alt={rt.productId.name}
+                    className="product-img"
+                  />
+                </Link>
+              ) : (
+                "No Image"
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

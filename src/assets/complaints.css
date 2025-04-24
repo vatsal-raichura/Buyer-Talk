@@ -1,13 +1,24 @@
 /* Container Styling */
+/* body {
+  font-family: Arial, sans-serif;
+  background: url('src/assets/images/wmremove-transformed (2).jpeg') no-repeat center center fixed;
+  background-size: cover;
+} */
+
+
 .table-container {
     width: 90%;
     margin: 20px auto;
     overflow-x: auto;
-    background: #fff;
+    /* background: #fff; */
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    background-image:url("D:\8th_Sem_Project\Buyer_talk\src\assets\images\wmremove-transformed (2).jpeg");
+        background-repeat:"no-repeat";
+        background-size:"cover";
+        background-position:"center";
   }
   
   /* Table Styling */
@@ -32,15 +43,16 @@
     border-bottom: 1px solid #ddd;
   }
   
-  /* Set fixed column widths */
-  th:nth-child(1), td:nth-child(1) { width: 18%; } /* Description column */
-  th:nth-child(2), td:nth-child(2) { width: 10%; }
-  th:nth-child(3), td:nth-child(3) { width: 30%; }
-  th:nth-child(4), td:nth-child(4) { width: 12%; }
-  th:nth-child(5), td:nth-child(5) { width: 10%; }
-  th:nth-child(6), td:nth-child(6) { width: 10%; }
-  th:nth-child(7), td:nth-child(7) { width: 10%; } /* Image column */
-  
+ 
+/* Updated fixed column widths for 6 columns */
+th:nth-child(1), td:nth-child(1) { width: 26%; } /* Description */
+th:nth-child(2), td:nth-child(2) { width: 10%; } /* Status */
+th:nth-child(3), td:nth-child(3) { width: 13%; } /* Filed Date */
+th:nth-child(4), td:nth-child(4) { width: 24%; } /* Response - now wider */
+th:nth-child(5), td:nth-child(5) { width: 12%; } /* Product Name */
+th:nth-child(6), td:nth-child(6) { width: 15%; } /* Product Image */
+ /* Action button */
+
   /* Complaint Description Styling */
   .description-cell {
     text-align: left;
@@ -106,4 +118,85 @@
     color: #155724;
     border: 1px solid #c3e6cb;
   }
+
+  /* Responsive Card Grid for Mobile View */
+.complaint-card-grid {
+  display: none;
+  margin-top: 20px;
+}
+
+.complaint-card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 10px auto;
+  padding: 20px;
+  width: 95%;
+}
+
+.card-row {
+  margin-bottom: 10px;
+}
+
+.card-row strong {
+  display: block;
+  color: #343a40;
+  margin-bottom: 4px;
+}
+
+.complaint-card img.product-img {
+  width: 100%;
+  max-height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 5px;
+  border: 2px solid #dee2e6;
+}
+
+/* Hide table and show card grid on small screens */
+.mobile-card-container {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .complaint-table {
+    display: none;
+  }
+
+  .mobile-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+  }
+
+  .mobile-card {
+    background-color: rgba(0, 0, 70, 0.95);
+    color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .mobile-card img {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 6px;
+  }
+
+  .mobile-card p {
+    margin-bottom: 10px;
+    font-size: 1rem;
+  }
+
+  .delete-btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+
+
   

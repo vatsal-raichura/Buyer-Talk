@@ -453,7 +453,7 @@ export const ViewAllComplaints = () => {
   };
 
   return (
-    <div className="table-container">
+    <div className="table-container " >
       
       {isLoading && <CustomLoader />}
       <h2>All Complaints</h2>
@@ -462,9 +462,10 @@ export const ViewAllComplaints = () => {
           <tr>
             <th>Complaint Description</th>
             <th>Status</th>
-            <th>Response</th>
+           
 
             <th>Filed Date</th>
+            <th>Response</th>
             <th>Product Name</th>
             
             <th>Product Image</th>
@@ -483,8 +484,9 @@ export const ViewAllComplaints = () => {
             {getStatusDetails(ct.status).icon} {ct.status}
              </span>
             </td>
-                <td>{ct.resolutionMessage || "N|A"}</td>
+               
                 <td>{new Date(ct.fileddate).toLocaleDateString()}</td>
+                <td>{ct.resolutionMessage || "N|A"}</td>
                 <td>{ct.productId?.name || "N/A"}</td>
                 
                 <td>
@@ -509,6 +511,36 @@ export const ViewAllComplaints = () => {
           )}
         </tbody>
       </table>
+          {/*mobile responsive view */}
+          <div className="mobile-card-container">
+        {complaints.map((ct) => (
+          <div className="mobile-card" key={ct._id}>
+            <p><strong>Description:</strong> {ct.description}</p>
+            <p>
+              <strong>Status:</strong>{" "}
+              <span className={`status-badge ${ct.status?.toLowerCase()}`}>
+                {getStatusDetails(ct.status).icon} {ct.status}
+              </span>
+            </p>
+            <p><strong>Filed Date:</strong> {new Date(ct.fileddate).toLocaleDateString()}</p>
+            <p><strong>Response:</strong> {ct.resolutionMessage || "N/A"}</p>
+            <p><strong>Product:</strong> {ct.productId?.name || "N/A"}</p>
+            <div className="product-img-wrapper">
+              {ct.productId?.productURL ? (
+                <Link to={`/user/productdetails/${ct.productId._id}`}>
+                  <img
+                    src={ct.productId.productURL}
+                    alt={ct.productId.name}
+                    className="product-img"
+                  />
+                </Link>
+              ) : (
+                "No Image"
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

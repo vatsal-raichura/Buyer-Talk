@@ -71,7 +71,9 @@ const shouldApplyAppWrapper = (pathname)=>{
     '/businessForgotPassword',
     '/productdetails',
     '/contactus',
-    '/adminLogin'
+    '/adminLogin',
+    '/signUpRole',
+    '/loginRole',
     
   ];
   if(pathname === "/") return false;

@@ -133,7 +133,7 @@ export const BusinessSignUp = () => {
           className="d-flex align-items-center justify-content-center min-vh-100"
           style={{
             backgroundImage:
-              "url(https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp)",
+              "url(/src/assets/images/online-registration-form-modish-form-filling-internet-website_31965-234555.avif)",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

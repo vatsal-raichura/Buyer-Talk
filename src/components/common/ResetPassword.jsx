@@ -66,7 +66,7 @@ export const ResetPassword = () => {
       className="d-flex align-items-center justify-content-center min-vh-100"
       style={{
         backgroundImage:
-          "url(https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp)",
+          "url(/src/assets/images/forget-password-illustrations_887068-224.avif)",
         backgroundSize: "cover",
       }}
     >

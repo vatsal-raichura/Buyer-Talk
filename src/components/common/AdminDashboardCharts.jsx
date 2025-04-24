@@ -336,11 +336,11 @@ const UserActivityChart = () => {
   return (
     <div className="chart-container">
       <h5 className="text-center mb-3">Active vs Inactive Users</h5>
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width="100%" height={300}>             
         <PieChart>
           <Pie
             data={activityData}
-            cx="50%"
+            cx="50%"      
             cy="50%"
             outerRadius={120}
             fill="#8884d8"

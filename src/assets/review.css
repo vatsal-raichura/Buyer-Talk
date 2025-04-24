@@ -1,3 +1,10 @@
+/* body {
+  font-family: Arial, sans-serif;
+  background: url('/assets/images/wmremove-transformed (1).jpeg') no-repeat center center fixed;
+  background-size: cover;
+} */
+
+
 .table-container {
     width: 100%;
     margin: 20px auto;
@@ -32,14 +39,12 @@
   }
   
   /* Column Width Adjustments */
-  th:nth-child(1), td:nth-child(1) { width: 25%; }
-  th:nth-child(2), td:nth-child(2) { width: 12%; }
-  th:nth-child(3), td:nth-child(3) { width: 18%; }
-  th:nth-child(4), td:nth-child(4) { width: 12%; }
-  th:nth-child(5), td:nth-child(5) { width: 10%; }
-  th:nth-child(6), td:nth-child(6) { width: 10%; }
-  th:nth-child(7), td:nth-child(7) { width: 16%; }
-  th:nth-child(8), td:nth-child(8) { width: 10%; }
+  th:nth-child(1), td:nth-child(1) { width: 30%; }
+  th:nth-child(2), td:nth-child(2) { width: 15%; }
+  th:nth-child(3), td:nth-child(3) { width: 15%; }
+  th:nth-child(4), td:nth-child(4) { width: 20%; }
+  th:nth-child(5), td:nth-child(5) { width: 20%; }
+
   
   /* Complaint Description Styling */
   .description-cell {
@@ -168,4 +173,49 @@
     color: #155724;
     border: 1px solid #c3e6cb;
   }
+
+  .mobile-card-container {
+    display: none;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .complaint-table {
+      display: none;
+    }
+  
+    .mobile-card-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      padding: 10px;
+    }
+  
+    .mobile-card {
+      background-color: rgba(0, 0, 70, 0.95);
+      color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      width: 100%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+  
+    .mobile-card img {
+      width: 100%;
+      height: auto;
+      margin-top: 10px;
+      border-radius: 6px;
+    }
+  
+    .mobile-card p {
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+  
+    .delete-btn {
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+  
+  
   

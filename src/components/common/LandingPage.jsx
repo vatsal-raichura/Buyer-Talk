@@ -1,12 +1,14 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import "../../assets/landingPage.css";
+
 import "../../assets/landing/css/style.css";
 import "../../assets/landing/css/responsive.css";
 import about2image from "../../assets/landing/images/about-img2.png";
 import sliderImage from "../../assets/landing/images/slider-img.png";
 import { Link } from "react-router-dom";
+import "../../assets/landingPage.css";
+
 
 export const LandingPage = () => {
   return (

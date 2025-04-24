@@ -6,11 +6,9 @@ import axios from "axios";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import { CustomLoader } from "../CustomLoader";
 
-
 export const ForgotPassword = () => {
-
-  const [isLoading, setisLoading] = useState(false)  
-//   const navigate = useNavigate();
+  const [isLoading, setisLoading] = useState(false);
+  //   const navigate = useNavigate();
 
   const {
     register,
@@ -19,19 +17,17 @@ export const ForgotPassword = () => {
   } = useForm();
 
   const submitHandler = async (data) => {
-
-
     try {
-
-      setisLoading(true) 
-      const res = await axios.post("/user/forgotpassword", { email: data.email  });
+      setisLoading(true);
+      const res = await axios.post("/user/forgotpassword", {
+        email: data.email,
+      });
       console.log(res.data);
-      setisLoading(false)
+      setisLoading(false);
 
       if (res.status === 200) {
-        
         // alert("login successfully")
-        toast.success('Password reset link sent successfully', {
+        toast.success("Password reset link sent successfully", {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -41,14 +37,11 @@ export const ForgotPassword = () => {
           progress: undefined,
           theme: "dark",
           transition: Bounce,
-          });
-        
+        });
 
-        
         //   setTimeout(() => {
         //     navigate("/Login");
         //   }, 2500);
-        
       }
     } catch (error) {
       // alert("Login failed");
@@ -62,8 +55,8 @@ export const ForgotPassword = () => {
         progress: undefined,
         theme: "dark",
         transition: Bounce,
-        });
-     setisLoading(false)   
+      });
+      setisLoading(false);
     }
   };
 
@@ -75,12 +68,22 @@ export const ForgotPassword = () => {
         message: "Invalid email format",
       },
     },
-    
   };
 
   return (
-    <Container fluid className="d-flex align-items-center justify-content-center min-vh-100" style={{ backgroundImage: "url(https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp)", backgroundSize: "cover" }}>
-       <ToastContainer
+    <Container
+      fluid
+      className="d-flex align-items-center justify-content-center min-vh-100"
+      style={{
+        backgroundImage:"",
+         
+          backgroundRepeat: 'no-repeat',
+ 
+ 
+  
+      }}
+    >
+      <ToastContainer
         position="top-center"
         autoClose={5000}
         hideProgressBar={false}
@@ -93,29 +96,31 @@ export const ForgotPassword = () => {
         theme="dark"
         transition={Bounce}
       />
-      {isLoading == true  && <CustomLoader/>}
-      <Card className="p-4 shadow-lg" style={{ maxWidth: "400px", width: "100%" }}>
+      {isLoading == true && <CustomLoader />}
+      <Card
+        className="p-4 shadow-lg"
+        style={{ maxWidth: "400px", width: "100%",
+          }}
+      >
         <Card.Body>
           <h2 className="text-center mb-4">Sign In</h2>
           <Form onSubmit={handleSubmit(submitHandler)}>
             {/* Email Input */}
             <Form.Group className="mb-3">
               <Form.Label>Your Email</Form.Label>
-              <Form.Control type="email" {...register("email", ValidationSchema.emailValidator)} />
-              {errors.email && <span className="text-danger">{errors.email.message}</span>}
+              <Form.Control
+                type="email"
+                {...register("email", ValidationSchema.emailValidator)}
+              />
+              {errors.email && (
+                <span className="text-danger">{errors.email.message}</span>
+              )}
             </Form.Group>
-
-            
-
-            
 
             {/* Submit Button */}
             <Button variant="primary" className="w-100 mb-3" type="submit">
               Get a Link
             </Button>
-
-
-        
           </Form>
           <div className="text-center">
             <Link to="/login">Back to Login</Link>

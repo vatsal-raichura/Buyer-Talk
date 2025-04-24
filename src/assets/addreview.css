@@ -1,0 +1,172 @@
+/* .review-bg {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.4),
+        rgba(0, 0, 0, 0.7)
+      ),
+      url("D:\8th_Sem_Project\Buyer_talk\src\assets\images\wmremove-transformed.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+  } */
+  
+  .bg-glass {
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+  }
+  
+  button.btn-primary {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    border: none;
+    transition: all 0.3s ease-in-out;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  
+  button.btn-primary:hover {
+    background: linear-gradient(135deg, #00f2fe, #4facfe);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 18px rgba(0, 191, 255, 0.4);
+  }
+  
+  .form-control-lg,
+  .form-select {
+    border-radius: 12px;
+    font-size: 1.05rem;
+    padding: 12px 16px;
+    background-color: rgba(255, 255, 255, 0.85);
+  }
+  
+  .form-control-lg:focus,
+  .form-select:focus {
+    border-color: #00c6ff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 198, 255, 0.3);
+  }
+  
+  h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 28px;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+  }
+  
+  .text-danger {
+    font-size: 0.9rem;
+    margin-top: 4px;
+    display: block;
+  }
+
+  .review-page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 15px;
+    background-image: url("D:\8th_Sem_Project\Buyer_talk\src\assets\images\wmremove-transformed (1).jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .review-form-container {
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .review-card {
+    background-color: rgba(255, 255, 255, 0.95); /* Less transparent */
+    border-radius: 18px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 2rem;
+    backdrop-filter: blur(6px);
+  }
+  
+  /* Typography */
+  .review-card h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  .form-control-lg,
+  .form-select {
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+  }
+  
+  button[type="submit"] {
+    font-size: 1rem;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #004080;
+    transform: translateY(-1px);
+  }
+  
+  /* Small Devices (≤ 576px) */
+  @media (max-width: 576px) {
+    .review-card {
+      padding: 1.5rem;
+      border-radius: 12px;
+    }
+  
+    .review-card h2 {
+      font-size: 1.5rem;
+    }
+  
+    .form-control-lg,
+    .form-select,
+    button {
+      font-size: 0.95rem;
+    }
+  }
+  
+  /* Ultra Small (≤ 400px, e.g. 320px phones) */
+  @media (max-width: 400px) {
+    .review-card {
+      padding: 1rem;
+    }
+  
+    .review-card h2 {
+      font-size: 1.3rem;
+    }
+  
+    .form-label {
+      font-size: 0.85rem;
+    }
+  
+    .form-control-lg,
+    .form-select {
+      font-size: 0.85rem;
+    }
+  
+    button[type="submit"] {
+      font-size: 0.9rem;
+      padding: 10px;
+    }
+  }
+  

@@ -1,0 +1,14 @@
+/* body {
+    font-family: Arial, sans-serif;
+    background: url('src/assets/images/wmremove-transformed (2).jpeg') no-repeat center center fixed;
+    background-size: cover;
+  } */
+
+  .complaints-bg{
+    background-image:url("D:\8th_Sem_Project\Buyer_talk\src\assets\images\wmremove-transformed (2).jpeg");
+          background-repeat:"no-repeat";
+          background-size:"cover";
+          background-position:"center";
+  }
+
+  

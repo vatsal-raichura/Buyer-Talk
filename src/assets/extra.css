@@ -1,0 +1,466 @@
+/* /* /* .table-container {
+  width: 100%;
+  margin: 20px auto;
+  overflow-x: auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styling */
+/* .complaint-table {
+  width: 100%;
+  min-width: 1000px;
+  table-layout: auto;
+  border-collapse: collapse;
+  background: #f8f9fa;
+  border-radius: 8px;
+  text-align: left;
+}
+
+/* Header Styling */
+thead {
+    background: #343a40;
+    color: white;
+  }
+  
+  th,
+  td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+  }
+  
+  /* Column Width Adjustments */
+  th:nth-child(1),
+  td:nth-child(1) {
+    width: 15%;
+  }
+  th:nth-child(2),
+  td:nth-child(2) {
+    width: 10%;
+  }
+  th:nth-child(3),
+  td:nth-child(3) {
+    width: 25%;
+  }
+  th:nth-child(4),
+  td:nth-child(4) {
+    width: 10%;
+  }
+  th:nth-child(5),
+  td:nth-child(5) {
+    width: 10%;
+  }
+  th:nth-child(6),
+  td:nth-child(6) {
+    width: 10%;
+  }
+  th:nth-child(7),
+  td:nth-child(7) {
+    width: 10%;
+  }
+  
+  /* Complaint Description & Response Styling */
+  td.description-cell,
+  td.response-cell {
+    max-width: 500px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  
+  .description-content {
+    max-height: 180px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    padding: 6px;
+    border-radius: 6px;
+    background-color: #f1f3f5;
+    line-height: 1.6;
+  }
+  
+  /* Row Styling */
+  tr:nth-child(even) {
+    background: #f1f1f1;
+  }
+  
+  tr:hover {
+    background: rgba(0, 123, 255, 0.1);
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  /* Product Image Styling */
+  .product-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 3px solid #dee2e6;
+    transition: transform 0.3s;
+  }
+  .product-img:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Status Badges */
+  .status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: capitalize;
+  }
+  .status-badge.open {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+  }
+  .status-badge.escalated {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+  .status-badge.resolved {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+  
+  /* Cards */
+  .card {
+    border-radius: 12px;
+    transition: transform 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+  }
+  .card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Responsive Tweaks */
+  @media (max-width: 934px) {
+    th,
+    td {
+      font-size: 14px;
+      padding: 10px;
+    }
+    .product-img {
+      width: 80px;
+      height: 80px;
+    }
+  }
+  @media (max-width: 767px) {
+    th,
+    td {
+      font-size: 12px;
+      padding: 8px;
+    }
+    .product-img {
+      width: 70px;
+      height: 70px;
+    }
+  }
+  @media (max-width: 575px) {
+    .complaint-table {
+      min-width: 800px;
+    }
+    th,
+    td {
+      font-size: 11px;
+      padding: 6px;
+    }
+    .product-img {
+      width: 60px;
+      height: 60px;
+    }
+  }
+  @media (max-width: 480px) {
+    th,
+    td {
+      font-size: 10px;
+      padding: 5px;
+    }
+    .product-img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  @media (max-width: 360px) {
+    th,
+    td {
+      font-size: 9px;
+      padding: 4px;
+    }
+    .product-img {
+      width: 40px;
+      height: 40px;
+    }
+  } */
+  
+  
+  /* Container for the Card Layout */
+  .complaint-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+    margin: 20px 0;
+  }
+  
+  /* Individual Complaint Card Styling */
+  .complaint-card {
+    width: 100%;
+    /* max-width: 350px;  */
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .complaint-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Complaint Header */
+  .complaint-card .header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+  
+  .complaint-card .header .status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    text-transform: capitalize;
+  }
+  
+  .complaint-card .header .status-badge.open {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  .complaint-card .header .status-badge.escalated {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  .complaint-card .header .status-badge.resolved {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  /* Complaint Content */
+  .complaint-card .description {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  
+  /* Expandable Response */
+  .complaint-card .response {
+    font-size: 1rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 80px;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+  
+  .complaint-card .response.expand {
+    max-height: 500px;
+  }
+  
+  /* "View Response" Span */
+  .complaint-card .view-response {
+    display: inline-block;
+    color: #007bff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 5px;
+  }
+  
+  /* Footer Content */
+  .complaint-card .footer {
+    margin-top: 15px;
+  }
+  
+  .product-img {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  
+  button {
+    margin-top: 10px;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .complaint-card {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .complaint-card {
+      padding: 15px;
+    }
+    .complaint-card .description,
+    .complaint-card .response {
+      font-size: 0.9rem;
+    }
+  }
+  
+  .complaint-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #0d6efd;
+  }
+  
+  .complaint-field {
+    margin-bottom: 1rem;
+  }
+  
+  .complaint-container {
+    padding: 2rem;
+    max-width: 100%;
+  }
+  
+  .complaint-card {
+    transition: all 0.3s ease;
+    height: auto !important;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 0.5rem;
+  }
+  
+  .complaint-card.expanded {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .complaint-img {
+    width: 100px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .view-response-toggle {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    .complaint-img {
+      width:100px;
+      height: 100px;
+    }
+  }
+  
+  .complaint-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    border-radius: 0 0 12px 12px;
+  }
+  
+  .footer-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .complaint-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 4px;
+  }
+  
+  .flip-link {
+    font-size: 0.75rem;
+    color: #007bff;
+    cursor: pointer;
+    margin-top: 0;
+    line-height: 1;
+  }
+  
+  .footer-delete-btn {
+    margin-left: auto;
+  }
+  .flip-card {
+    perspective: 1000px;
+    position: relative;
+  }
+  
+  .flip-card-inner {
+    transition: transform 0.6s ease;
+    transform-style: preserve-3d;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  
+  .flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .flip-card-front,
+  .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  
+  .flip-card-front {
+    transform: rotateY(0deg);
+    z-index: 2;
+  }
+  
+  .flip-card-back {
+    transform: rotateY(180deg);
+    z-index: 1;
+  }
+  
+  
+  /* Fix disappearing card on hover */
+  .flip-card-front,
+  .flip-card-back {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  
+  
+   
+  
+  
+     

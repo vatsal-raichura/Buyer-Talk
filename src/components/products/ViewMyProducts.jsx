@@ -2,7 +2,7 @@
   import React, { useEffect, useState } from 'react'
   import { Link } from 'react-router-dom'
   import { CustomLoader } from '../CustomLoader'
-  import "../../assets/complaints.css" 
+  import "../../assets/viewmyproducts.css" 
   
   import { Container, Card, Form, Button } from "react-bootstrap";
   import { Bounce, toast, ToastContainer } from "react-toastify";
@@ -63,13 +63,13 @@
                       <th>Product Name</th>
                       <th>Product Category</th>
                       
-                      <th>Product Brand</th>
-                      <th>Product Price</th>
+                      <th style={{width:"10%"}}>Product Brand</th>
+                      <th  style={{width:"10%"}}>Product Price</th>
 
 
                       <th>Product Image</th>
 
-                      <th>ACTION</th>
+                      <th style={{width:"25%"}}>ACTION</th>
                   </tr>
               </thead>
               <tbody>
@@ -81,8 +81,8 @@
                           
                           <td>{pr.category}</td>
                           
-                          <td>{pr.brand}</td>
-                          <td>₹{pr.price}</td>
+                          <td style={{width:"10%"}}>{pr.brand}</td>
+                          <td style={{width:"10%"}}>₹{pr.price}</td>
                           <td>
                                                         {pr?.productURL ? (
                                                           <Link to={`/business/productdetails2/${pr._id}`}>
@@ -98,9 +98,9 @@
                           </td>
                                           
                         
-                          <td >
+                          <td style={{width:"25%"}}>
                               <Link to ={`/product/updateproduct/${pr._id}`} className ="btn btn-info " style={{padding:"12px 20px"}}>UPDATE</Link>
-                              <span><Button  className="btn btn-danger  " onClick={()=>{handleDelete(pr._id)}}>DELETE</Button></span>
+                              <span ><Button  className="btn btn-danger  " onClick={()=>{handleDelete(pr._id)}}>DELETE</Button></span>
                               
                           </td>
                           
@@ -109,6 +109,37 @@
                   }
               </tbody>
           </table>
+
+          <div className="mobile-card-container">
+                  {products.map((pr) => (
+                    <div className="mobile-card" key={pr._id}>
+                      <div className="product-img-wrapper" style={{marginBottom:"2rem"}}>
+                        {pr?.productURL ? (
+                          <Link to={`/user/productdetails/${pr._id}`}>
+                            <img
+                              src={pr.productURL}
+                              alt={pr.name}
+                              className="product-img"
+                            />
+                          </Link>
+                        ) : (
+                          "No Image"
+                        )}
+                      </div>
+                      <p><strong>Description:</strong> {pr.description}</p>
+                      <p>
+                        <strong>Name:</strong>{pr.name}
+                        
+                      </p>
+                      <p><strong>Category</strong> {pr.category}</p>
+                      <p><strong>Brand:</strong> {pr.brand || "N/A"}</p>
+                      <p><strong>Price:</strong> {pr.price || "N/A"}</p>
+                      
+                      <Link to ={`/product/updateproduct/${pr._id}`} className ="btn btn-info " style={{padding:"12px 20px"}}>UPDATE</Link>
+                       <Button variant="danger" className="delete-btn" onClick={() => handleDelete(pr._id)}>DELETE</Button>
+                    </div>
+                  ))}
+                </div>
       </div>
     )
   }

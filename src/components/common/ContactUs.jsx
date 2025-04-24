@@ -5,12 +5,28 @@ import { useNavigate } from "react-router-dom";
 import { Container, Card, Form, Button } from "react-bootstrap";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import { CustomLoader } from "../CustomLoader";
+import "../../assets/contactus.css";
 
 
 export const ContactUs = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
   const [isLoading, setisLoading] = useState(false);
+
+  const handleBackClick = () => {
+    const role = localStorage.getItem("role");
+   
+  
+    
+    if (role === "user") {
+      navigate("/user/userprofile");
+    } else if (role === "business") {
+      navigate("/business/businessprofile");
+    } else {
+      navigate("/"); // fallback to home or landing page
+    }
+  };
+  
 
   const submitHandler = async (data) => {
     console.log(data);
@@ -54,11 +70,11 @@ export const ContactUs = () => {
   };
 
   return (
-    <div>
+    <div  style={{backgroundImage:"url(/src/assets/images/photo-1423666639041-f56000c27a9a.avif)"}}>
       <ToastContainer position="top-left" autoClose={5000} theme="dark" transition={Bounce} />
       {isLoading && <CustomLoader></CustomLoader> }
       <Form onSubmit={handleSubmit(submitHandler)}>
-        <Container fluid className="d-flex align-items-center justify-content-center min-vh-100" style={{ backgroundImage: "url(https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp)", backgroundSize: "cover" }}>
+        <Container fluid className="d-flex align-items-center justify-content-center min-vh-100" >
           <Card className="m-3 p-3 shadow-lg" style={{ maxWidth: "500px", width: "100%" }}>
             <Card.Body className="px-4">
               <h2 className="text-uppercase text-center mb-4">Contact Us</h2>
@@ -84,6 +100,16 @@ export const ContactUs = () => {
               <Button type="submit" className="mt-3 w-100" variant="primary" size="lg">
                 Send Message
               </Button>
+              <div className="text-center mt-3">
+  <Button
+    variant="outline-primary"
+    className="fw-semibold px-4 py-2 rounded-pill"
+    onClick={handleBackClick}
+  >
+    ← Back to Dashboard
+  </Button>
+</div>
+
             </Card.Body>
           </Card>
         </Container>
