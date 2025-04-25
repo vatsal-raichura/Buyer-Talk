@@ -37,6 +37,12 @@ export const ProductDetails = () => {
           <p><b>Product Price:</b> <span className="product-price">₹{product.price}</span></p>
           <p><b>Product Category:</b> {product?.category || "No Category"}</p>
         </div>
+        <button
+    onClick={() => window.history.back()}
+    className="back-button"
+  >
+    ← Back to Dashboard
+  </button>
       </div>
     </div>
   );

@@ -100,7 +100,7 @@
                         
                           <td style={{width:"25%"}}>
                               <Link to ={`/product/updateproduct/${pr._id}`} className ="btn btn-info " style={{padding:"12px 20px"}}>UPDATE</Link>
-                              <span ><Button  className="btn btn-danger  " onClick={()=>{handleDelete(pr._id)}}>DELETE</Button></span>
+                              <span ><Button  className="btn btn-danger  " style={{background:"#dc3545"}} onClick={()=>{handleDelete(pr._id)}}>DELETE</Button></span>
                               
                           </td>
                           
@@ -135,8 +135,8 @@
                       <p><strong>Brand:</strong> {pr.brand || "N/A"}</p>
                       <p><strong>Price:</strong> {pr.price || "N/A"}</p>
                       
-                      <Link to ={`/product/updateproduct/${pr._id}`} className ="btn btn-info " style={{padding:"12px 20px"}}>UPDATE</Link>
-                       <Button variant="danger" className="delete-btn" onClick={() => handleDelete(pr._id)}>DELETE</Button>
+                      <Link to ={`/product/updateproduct/${pr._id}`} className ="btn btn-info " style={{padding:"6px 8px"}}>UPDATE</Link>
+                       <Button variant="danger" className="btn btn-danger" onClick={() => handleDelete(pr._id)}>DELETE</Button>
                     </div>
                   ))}
                 </div>
