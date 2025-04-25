@@ -29,7 +29,7 @@ export const ProductDetails = () => {
   return (
     <div className="product-details-container">
       <div className="product-card">
-        <h2 className="product-title">{product.name}</h2>
+        <h2 className="product-title " >{product.name}</h2>
         <img className="product-image" src={product.productURL} alt={product.name} />
         <div className="product-info">
           <p><b>Product Description:</b> {product.description}</p>

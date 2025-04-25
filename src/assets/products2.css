@@ -1,0 +1,46 @@
+.custom-card {
+    background-color: #f8f9fa; /* Light grey for card bg */
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .review-card {
+    background-color: #e3f2fd; /* Light blue for review cards */
+    border-left: 5px solid #0d6efd;
+  }
+  
+  .complaint-card {
+    background-color: #fef7e0; /* Light yellow for complaint cards */
+    border-left: 5px solid #ffc107;
+  }
+  
+  .complaint-escalated {
+    background-color: #f8d7da;
+    border-left: 5px solid #dc3545;
+  }
+  
+  .complaint-resolved {
+    background-color: #d1e7dd;
+    border-left: 5px solid #198754;
+  }
+  
+  .rating-badge {
+    font-size: 1.1rem;
+    color: #ffb400;
+    font-weight: bold;
+  }
+  
+  .status-badge {
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+
+  .bg{
+    background-image: url("/src/assets/images/ripe-apple-trivet-marble-table.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+  }
+  
