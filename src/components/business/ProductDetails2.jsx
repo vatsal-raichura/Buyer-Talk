@@ -654,7 +654,7 @@ export const ProductDetails2 = () => {
         )}
 
         {viewOption === "Complaints" && (
-          <Card className="shadow-sm">
+          <Card className="shadow-sm complaint-card">
             <Card.Body>
               <h5>Customer Complaints</h5>
               {(expandedComplaints

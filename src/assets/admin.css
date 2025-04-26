@@ -1,58 +1,103 @@
-.dashboard-card-hover:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3) !important;
-    cursor: pointer;
-  }
-  
-  .dashboard-chart-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
-    cursor: pointer;
-  }
+.card, .user-card {
+  transition: all 0.3s ease;
+  border: none;
+  border-radius: 12px;
+}
 
-  .product-col {
-    width: 10%;
-  }
-  .description-col {
-    width: 40%;
-  }
+.user-card {
+  background-color: #eaf4ff; /* Light blue background */
+  border: 1px solid #d0e4f7;
+  border-radius: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-  .card {
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .card:hover {
-    transform: translateY(-5px);
-  }
+.user-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
 
-  .card {
-    transition: all 0.2s ease-in-out;
-  }
-  
-  .card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card-title {
-    text-transform: capitalize;
-  }
-  
-  .card-body strong {
-    display: inline-block;
-    min-width: 85px;
-  }
+.user-card:hover {
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+}
 
-  .user-card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    background-color: #f9f9f9;
-  }
+.card-title {
+  text-transform: capitalize;
+  font-weight: bold;
+  color: #0056b3;
+}
+
+.text-success {
+  color: #28a745 !important;
+  font-weight: 600;
+}
+
+.text-danger {
+  color: #dc3545 !important;
+  font-weight: 600;
+}
+
+button.btn-info {
+  background-color: #17a2b8;
+  border: none;
+}
+
+button.btn-info:hover {
+  background-color: #138496;
+}
+
+button.btn-warning {
+  background-color: #ffc107;
+  border: none;
+}
+
+button.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+button.btn-danger {
+  background-color: #dc3545;
+  border: none;
+}
+
+button.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.modal-content {
+  border-radius: 15px;
+}
+
+.modal-header, .modal-footer {
+  background-color: #f8f9fa;
+  border: none;
+}
+
+.modal-body p {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.Toastify__toast-container {
+  font-size: 14px;
+}
+
+.admin-user-bg{
+  background-color: #333333; 
+  color: #f0f0f0; 
+  height: 100vh; 
   
-  .user-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-  }
-  
-  
-  
-  
+}
+
+
+.user-card .card-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.user-card .status {
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+
+

@@ -58,6 +58,12 @@ export const AdminSidebar = () => {
             >
               <li className="nav-item menu-open">
                 <ul className="nav nav-treeview">
+                <li className="nav-item">
+                    <Link to="/admin/admindashboard" className="nav-link active">
+                      <i className="nav-icon bi bi-circle" />
+                      <p>Dashboard</p>
+                    </Link>
+                  </li>
                   <li className="nav-item">
                     <Link to="/admin/getUsers" className="nav-link active">
                       <i className="nav-icon bi bi-circle" />

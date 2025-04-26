@@ -12,6 +12,9 @@ import {
   Button,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../../assets/adminproducts.css" 
+import { ArrowLeft } from "react-bootstrap-icons";
+
 
 export const AdminProductDetails = () => {
   const { productId } = useParams();
@@ -61,6 +64,14 @@ export const AdminProductDetails = () => {
 
   const handleStatusFilter = (e) => {
     setStatusFilter(e.target.value);
+  };
+
+  const handleGoBack = () => {
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      navigate("/business/businessprofile"); // Fallback if no history
+    }
   };
 
   const ratedReviews = reviews.filter((r) => r.rating != null);
@@ -134,6 +145,7 @@ export const AdminProductDetails = () => {
   );
 
   return (
+    <div className="bg">
     <Container className="mt-4">
       <Card className="shadow mb-4">
         <Row className="g-0">
@@ -169,6 +181,19 @@ export const AdminProductDetails = () => {
             </Card.Body>
           </Col>
         </Row>
+        <Button
+          variant="secondary"
+          onClick={handleGoBack}
+          style={{
+            position: "absolute",
+            bottom: "20px",
+            right: "20px",
+            
+          }}
+        >
+          <ArrowLeft /> Back 
+        </Button>
+        
       </Card>
 
       <Row className="mb-3">
@@ -205,7 +230,7 @@ export const AdminProductDetails = () => {
       </Row>
 
       {viewOption === "Ratings" && (
-        <Card className="shadow-sm mb-4">
+        <Card className="shadow-sm mb-4 review-card">
           <Card.Body>
             <h5>Customer Reviews</h5>
             {(expanded ? filteredReviews : filteredReviews.slice(0, 3)).map(
@@ -221,7 +246,7 @@ export const AdminProductDetails = () => {
                         Comment : {review.comment}
                       </span>
                       <span
-                        className="text-warning fs-6"
+                        className="text-warning fs-6 rating-badge"
                         style={{ margin: "0rem 2rem 2rem 0rem" }} 
                       >
                         ⭐ {review.rating} / 5
@@ -249,7 +274,7 @@ export const AdminProductDetails = () => {
       )}
 
       {viewOption === "Complaints" && (
-        <Card className="shadow-sm">
+        <Card className="shadow-sm complaint-card">
           <Card.Body>
             <h5>Customer Complaints</h5>
             {(expandedComplaints
@@ -358,5 +383,6 @@ export const AdminProductDetails = () => {
         </Card>
       )}
     </Container>
+    </div>
   );
 };

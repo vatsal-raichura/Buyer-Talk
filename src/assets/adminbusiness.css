@@ -1,0 +1,42 @@
+/* Ensure body takes full height for this page */
+.admin-business-bg{
+    
+        background-color: #333333; 
+        color: #f0f0f0; 
+        height: 200vh;
+        display: flex;
+    flex-direction: column;
+       
+        
+      
+}
+  
+  /* Ensure the container takes full screen minus header if needed */
+  
+  /* Flex for layout */
+  .container {
+    flex-grow: 1;
+    padding: 20px; /* Adjust as needed */
+  }
+  
+  /* Style for the card in BusinessDetails */
+  .business-card {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .business-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Optional: Add spacing and styling to the modal */
+  .modal-body {
+    background-color: #2e2e2e;
+    color: white;
+  }
+  
+  /* Button container */
+  .d-grip gap-2 {
+    gap: 15px;
+  }
+  

@@ -282,7 +282,7 @@ export const UpdateMyProduct = () => {
         fluid
         className="d-flex align-items-center justify-content-center min-vh-100"
         style={{
-          backgroundImage: "url(https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp)",
+          backgroundImage: "url(/src/assets/images/istockphoto-1581299905-2048x2048.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
