@@ -66,8 +66,14 @@ export const ResetPassword = () => {
       className="d-flex align-items-center justify-content-center min-vh-100"
       style={{
         backgroundImage:
-          "url(/src/assets/images/forget-password-illustrations_887068-224.avif)",
+          "url('/src/assets/images/6321602.jpg')",
         backgroundSize: "cover",
+        backgroundPosition:"center",
+        backgroundPositionY:"-150px",
+        // backgroundPositionX:"-100px",
+        backgroundRepeat:"no-repeat"
+
+
       }}
     >
       <ToastContainer

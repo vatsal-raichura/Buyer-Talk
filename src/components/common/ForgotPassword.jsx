@@ -75,9 +75,13 @@ export const ForgotPassword = () => {
       fluid
       className="d-flex align-items-center justify-content-center min-vh-100"
       style={{
-        backgroundImage:"",
+        backgroundImage:'url("/src/assets/images/forgot-password-concept-illustration_114360-1095.jpg")',
          
           backgroundRepeat: 'no-repeat',
+          backgroundSize:"cover",
+          backgroundPosition:"center",
+          backgroundPositionY:"-100px",
+          backgroundPositionX:"-100px"
  
  
   
