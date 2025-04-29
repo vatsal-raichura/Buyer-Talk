@@ -55,6 +55,7 @@ import { AdminProductDetails } from "./components/common/AdminProductDetails";
 import AdminUserManagement from "./components/common/AdminUserManagement";
 import { BusinessProfile } from "./components/business/BusinessProfile";
 import { AdminLogin } from "./components/admin/AdminLogin";
+import AdminPrivateRoutes from "./hooks/AdminPrivateRoutes";
 
 axios.defaults.baseURL ="http://localhost:3000"
 
@@ -178,6 +179,8 @@ function App() {
             ></Route>
           </Route>
 
+
+
           <Route path="" element={<UserPrivateRoutes></UserPrivateRoutes>}>
 
           <Route path="/user" element={<UserSidebar />}>
@@ -227,6 +230,7 @@ function App() {
             ></Route>
           </Route>
 
+          <Route path="" element={<AdminPrivateRoutes></AdminPrivateRoutes>}>
           <Route path="/admin" element={<AdminSidebar></AdminSidebar>}>
           <Route path="adminDashboard" element={<AdminDashboard></AdminDashboard>}></Route>
           <Route path="businessDetails" element={<BusinessDetails></BusinessDetails>}></Route>
@@ -237,6 +241,7 @@ function App() {
 
 
           
+          </Route>
           </Route>
 
           

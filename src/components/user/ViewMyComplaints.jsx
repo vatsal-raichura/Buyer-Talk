@@ -389,6 +389,7 @@ import { CustomLoader } from "../CustomLoader";
 import "../../assets/complaints.css" // Ensure you import CSS
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import { Bounce, ToastContainer,toast } from "react-toastify";
 
 export const ViewMyComplaints = () => {
   const [complaints, setComplaints] = useState([]);
@@ -413,6 +414,21 @@ export const ViewMyComplaints = () => {
     setIsLoading(false);
   };
 
+  const handleDelete = async (complaintId) => {
+        if (!window.confirm("Are you sure you want to delete this complaint?")) return;
+        try {
+          setIsLoading(true);
+          await axios.delete(`/complaint/complaint/${complaintId}`);
+          setIsLoading(false);
+          toast.success("Complaint deleted successfully!", { theme: "dark" });
+          setComplaints(complaints.filter(ct => ct._id !== complaintId));
+        } catch (error) {
+          console.error("Delete failed:", error);
+          toast.error("Failed to delete complaint!", { theme: "dark" });
+        }
+      };
+
+
   useEffect(() => {
     getAllComplaints();
   }, []);
@@ -432,7 +448,7 @@ export const ViewMyComplaints = () => {
 
   return (
     <div className="table-container ">
-      
+      <ToastContainer position="top-left" autoClose={5000} hideProgressBar={false} theme="dark" transition={Bounce} />
       {isLoading && <CustomLoader />}
       <h2>My Complaints</h2>
       <table className="complaint-table">
@@ -481,7 +497,7 @@ export const ViewMyComplaints = () => {
                   "No Image"
                 )}
               </td>
-              <td><Button variant="danger" className="delete-btn" onClick={() => handleDelete(rt._id)}>DELETE</Button></td>
+              <td><Button variant="danger" className="delete-btn" onClick={() => handleDelete(ct._id)}>DELETE</Button></td>
               </tr>
             ))
           ) : (
