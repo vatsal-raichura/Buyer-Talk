@@ -169,7 +169,7 @@ export const AdminLogin = () => {
           </Form.Group>
 
           <div className="text-center my-2">
-            <Link to="/businessForgotPassword">Forgot password?</Link>
+            <Link to="/adminForgotPassword">Forgot password?</Link>
           </div>
 
           {/* Submit Button */}

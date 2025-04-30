@@ -5,7 +5,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 
-export const BusinessResetPassword = () => {
+export const AdminResetPassword = () => {
   const token = useParams().token;
   const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ export const BusinessResetPassword = () => {
       token: token,
       password: data.password,
     };
-    const res = await axios.post("business/resetPassword", obj);
+    const res = await axios.post("admin/resetPassword", obj);
     console.log(res.data);
 
     if (res.status === 200) {
@@ -39,7 +39,7 @@ export const BusinessResetPassword = () => {
       });
 
       setTimeout(() => {
-        navigate("/businessLogin");
+        navigate("/adminLogin");
       }, 2500);
     }
   };

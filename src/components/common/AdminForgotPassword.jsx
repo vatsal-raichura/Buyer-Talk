@@ -7,7 +7,7 @@ import { Bounce, toast, ToastContainer } from "react-toastify";
 import { CustomLoader } from "../CustomLoader";
 
 
-export const BusinessForgotPassword = () => {
+export const AdminForgotPassword = () => {
 
   const [isLoading, setisLoading] = useState(false)  
 //   const navigate = useNavigate();
@@ -24,7 +24,7 @@ export const BusinessForgotPassword = () => {
     try {
 
       setisLoading(true) 
-      const res = await axios.post("/business/forgotpassword", { email: data.email  });
+      const res = await axios.post("/admin/forgotpassword", { email: data.email  });
       console.log(res.data);
       setisLoading(false)
 
@@ -69,7 +69,7 @@ export const BusinessForgotPassword = () => {
 
   const ValidationSchema = {
     emailValidator: {
-      required: " Business Email is required *",
+      required: " Admin Email is required *",
       pattern: {
         value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
         message: "Invalid email format",
@@ -129,7 +129,7 @@ export const BusinessForgotPassword = () => {
         
           </Form>
           <div className="text-center">
-            <Link to="/businessLogin">Back to Login</Link>
+            <Link to="/adminLogin">Back to Login</Link>
           </div>
         </Card.Body>
       </Card>
