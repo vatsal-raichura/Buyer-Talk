@@ -59,7 +59,8 @@ import AdminPrivateRoutes from "./hooks/AdminPrivateRoutes";
 import { AdminForgotPassword } from "./components/common/AdminForgotPassword";
 import { AdminResetPassword } from "./components/common/AdminResetPassword";
 
-axios.defaults.baseURL ="http://localhost:3000"
+axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+
 
 const shouldApplyAppWrapper = (pathname)=>{
   const noWrapperPaths =[
@@ -89,7 +90,9 @@ const shouldApplyAppWrapper = (pathname)=>{
 // import {LandingPage} from './components/common/LandingPage'
 
 function App() {
-  axios.defaults.baseURL = "http://localhost:3000";
+  // axios.defaults.baseURL = "http://localhost:3000";
+  axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+
   const location = useLocation();
 
   useEffect(() => {
