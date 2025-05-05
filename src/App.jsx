@@ -91,7 +91,9 @@ const shouldApplyAppWrapper = (pathname)=>{
 
 function App() {
   // axios.defaults.baseURL = "http://localhost:3000";
-  axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+  // axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+  axios.defaults.baseURL = import.meta.env.VITE_REACT_APP_API_BASE_URL;
+
   axios.defaults.withCredentials = true; // if using cookies/auth
 
   const location = useLocation();
