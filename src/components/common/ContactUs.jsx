@@ -70,7 +70,7 @@ export const ContactUs = () => {
   };
 
   return (
-    <div  style={{backgroundImage:"url(/src/assets/images/photo-1423666639041-f56000c27a9a.avif)"}}>
+    <div  style={{backgroundImage:"url(/assets/images/photo-1423666639041-f56000c27a9a.avif)"}}>
       <ToastContainer position="top-left" autoClose={5000} theme="dark" transition={Bounce} />
       {isLoading && <CustomLoader></CustomLoader> }
       <Form onSubmit={handleSubmit(submitHandler)}>

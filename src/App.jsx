@@ -58,6 +58,7 @@ import { AdminLogin } from "./components/admin/AdminLogin";
 import AdminPrivateRoutes from "./hooks/AdminPrivateRoutes";
 import { AdminForgotPassword } from "./components/common/AdminForgotPassword";
 import { AdminResetPassword } from "./components/common/AdminResetPassword";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 
@@ -111,6 +112,7 @@ function App() {
     <div className={shouldApplyAppWrapper(location.pathname) ? "app-wrapper":"/user"}
      
     >
+      <ErrorBoundary>
       <Routes>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/signup" element={<SignUp></SignUp>}></Route>
@@ -271,6 +273,7 @@ function App() {
           
         
       </Routes>
+      </ErrorBoundary>
     </div>
   );
 }

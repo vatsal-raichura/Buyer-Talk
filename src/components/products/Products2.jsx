@@ -135,7 +135,7 @@ export const Products2 = () => {
         fluid
         className="d-flex align-items-center justify-content-center min-vh-100"
         style={{
-          backgroundImage: "url(/src/assets/images/istockphoto-1581299905-2048x2048.jpg)",
+          backgroundImage: "url(/assets/images/istockphoto-1581299905-2048x2048.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

@@ -66,7 +66,7 @@ export const BusinessResetPassword = () => {
       className="d-flex align-items-center justify-content-center min-vh-100"
       style={{
         backgroundImage:
-          "url('/src/assets/images/6321602.jpg')",
+          "url('/assets/images/6321602.jpg')",
         backgroundSize: "cover",
         backgroundPosition:"center",
         backgroundPositionY:"-150px",

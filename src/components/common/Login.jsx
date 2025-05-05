@@ -136,7 +136,7 @@ export const Login = () => {
     className="d-flex align-items-center justify-content-center min-vh-100"
     style={{
       backgroundImage:
-        "url(/src/assets/images/device-protected-by-cyber-security_23-2149270838.jpg)",
+        "url(/assets/images/device-protected-by-cyber-security_23-2149270838.jpg)",
       backgroundSize: "cover",
       backgroundPosition: "center",
     }}
